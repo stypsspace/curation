@@ -1,0 +1,206 @@
+
+/********************************************************************
+Body
+*******************************************************************/
+
+body{
+/*background:#070707; 
+color:#fff; */
+position: relative; 
+font-family: 'Inter', sans-serif;
+font-size:14px;
+width:100%;
+}
+
+
+
+
+.site-header{
+/*background:#070707; 
+color:#fff; */
+margin-top:10px; 
+padding-left:10px;
+padding-right:10px;  
+}
+
+
+.site-header-nav{
+display: flex;
+justify-content: space-between;
+align-items: center;
+width:100%;  
+
+}
+
+
+.wrap{
+  position:relative;
+  margin-top:100px; 
+  padding-left:10px;
+padding-right:10px;
+}
+
+/********************************************************************
+Posts.
+*******************************************************************/
+/* Categories grid */
+.category-container{
+  display: grid;
+  grid-template-columns:repeat(3, 1fr);
+  grid-column-gap:7px;
+  width:100%;  
+  }
+
+/* Wrap */
+.posts-wrap{ 
+position: relative;
+}
+
+/* Article */
+.post-article{
+position: relative; 
+width:50%;
+}
+
+
+/*Post filter */
+.filter-container{
+display: flex;
+justify-content: space-between;
+align-items: center;
+width:25%; 
+}
+
+.filter-container button{
+position: relative;  
+}
+
+
+/*Post header */
+.post-header{
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+
+.post-title{
+position: relative; 
+}
+
+.post-externalurl{
+position: relative; 
+}
+
+.post-date{
+position: relative;
+display:none;
+}
+
+
+.post-excerpt{
+position: relative;
+display:none;
+}
+
+
+.post-image{
+position: relative;
+}
+
+.post-image img{
+width:100%;
+height:auto;  
+}
+
+
+.author-name-wrap{
+color:#fff; 
+display:none;
+}
+
+
+/* Filter container */
+.filter-container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+
+
+
+
+
+/* More posts wrap */
+.more-posts-wrap{
+position:relative;   
+}
+
+/* Header */
+.more-posts-header{
+position:relative;
+display:none;
+}
+
+/* Content */
+.more-posts-content{
+position:relative; 
+background: #070707; 
+padding: 30px;
+border-radius: 20px;;   
+}
+
+
+
+
+
+/***********************************************************************
+Post single
+***********************************************************************/
+/* Wrap */
+.post-single-wrap{
+position: relative;
+}
+
+/* Header */
+.post-single-header{
+display: flex;
+justify-content: space-between;
+align-items: center;
+width:50%;
+}
+
+
+
+
+.post-single-image{
+position: relative;
+}
+
+.post-single-image img{
+width:50%;
+height:auto;  
+}
+
+
+
+/***********************************************************************
+Footer
+***********************************************************************/
+.site-footer{
+background: #f3f3f3;
+height:50px;
+width:100%;
+}
+
+
+.site-footer-content{
+
+}
+
+.site-footer-content p{
+position: relative;  
+text-align: center;
+padding-top:20px;
+}

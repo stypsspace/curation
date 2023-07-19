@@ -1,0 +1,68 @@
+/******************************************************************
+Reset
+******************************************************************/
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  }
+  
+  img, svg {
+  display:block;
+  max-width:100%;   
+  }
+  
+  a{
+  text-decoration:none;  
+  color:#000;
+  }
+  
+  li{
+  list-style: none;   
+  }
+  
+  button,
+  input,
+  select,
+  textarea {
+  outline:none;
+  border:none;
+  background:transparent; 
+  -webkit-appearance: none; 
+  -moz-appearance: none; 
+  -ms-appearance: none; 
+  -o-appearance: none; 
+  appearance: none;  
+  }
+  
+
+  h1, h2, h3, h4, h5,h6{
+  font-weight:normal;  
+  }
+
+h3{
+  font-size:14px;  
+    }
+ 
+
+/* Add the following styles to your custom.css or global.css */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.site-wrapper {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-height: 100vh;
+}
+
+.site-content {
+  grid-row: 1 / -1;
+}
+
+.site-footer {
+  grid-row: -1;
+}
+
