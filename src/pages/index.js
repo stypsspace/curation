@@ -35,7 +35,7 @@ const Posts = ({ posts }) => {
           <button onClick={() => handleCategoryChange('Personal')}>Personal</button>
         </li>
         <li>
-          <button onClick={() => handleCategoryChange('Studio')}>Studio</button>
+          <button onClick={() => handleCategoryChange('App')}>App</button>
         </li>
         <li>
           <button onClick={() => handleCategoryChange('Commerce')}>Commerce</button>
