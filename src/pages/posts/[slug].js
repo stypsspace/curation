@@ -52,6 +52,12 @@ const Post = ({ post }) => {
         )}
       </div>
 
+
+
+
+
+      <div className='post-single-content'>
+
       <div className='post-date'>
       <time dateTime={new Date(post.fields.date).toISOString().slice(0, 10)}>
         {new Date(post.fields.date).toLocaleDateString('en-US', {
@@ -82,6 +88,12 @@ const Post = ({ post }) => {
       <div className='post-single-content'>
         <RichText content={content} />
       </div>
+</div>
+
+
+
+
+
 
       </div>
     </div>

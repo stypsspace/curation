@@ -14,7 +14,7 @@ const ContentfulImage = (props) => {
 const Personal = ({ posts }) => {
   return (
     <div>
-      <h3>Personal</h3>
+      <h3 className='page-title'>Personal</h3>
       <ul className='category-container'>
         {posts.map((post) => {
           const { title, slug, coverImage, date, author, externalUrl } = post.fields;
@@ -53,7 +53,7 @@ const Personal = ({ posts }) => {
                 })}
               </time>
               </div>
-              
+
               <div className='author-name-wrap'>
               <div className='author-name-image'>
                   <ContentfulImage

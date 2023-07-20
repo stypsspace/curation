@@ -35,10 +35,9 @@ width:100%;
 
 .wrap{
   position:relative;
-  margin-top:100px; 
-  padding-left:10px;
-padding-right:10px;
-}
+  margin-top:100px;
+  }
+
 
 /********************************************************************
 Posts.
@@ -49,6 +48,9 @@ Posts.
   grid-template-columns:repeat(3, 1fr);
   grid-column-gap:7px;
   width:100%;  
+  padding-left:10px;
+  padding-right:10px;
+  
   }
 
 /* Wrap */
@@ -69,6 +71,8 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 width:25%; 
+padding-left:10px;
+padding-right:10px;
 }
 
 .filter-container button{
@@ -161,6 +165,10 @@ Post single
 /* Wrap */
 .post-single-wrap{
 position: relative;
+padding-left: 10px;
+padding-right:10px;
+width:100%;
+clear:both;
 }
 
 /* Header */
@@ -172,18 +180,38 @@ width:50%;
 }
 
 
-
-
 .post-single-image{
 position: relative;
+width:50%;
+float:left;
 }
 
 .post-single-image img{
-width:50%;
+width:100%;
 height:auto;  
 }
 
 
+.post-single-content{
+position: relative;
+width:50%;
+float:left;
+padding-left:10px;
+}
+
+.post-single-content p{
+position: relative;
+width:100%; 
+}
+
+
+/*************************************************************************
+ Categories page 
+ *************************************************************************/
+.page-title{
+position: relative;
+padding-left: 10px;  
+}
 
 /***********************************************************************
 Footer
