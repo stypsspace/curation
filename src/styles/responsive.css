@@ -1,0 +1,35 @@
+
+/********************************************************************
+Posts.
+*******************************************************************/
+/*******************************************************************
+Max-width:768px and min-width:280px
+********************************************************************/
+@media only screen and (max-width:540px) and (min-width:415px){
+
+/* Categories grid */
+.category-container{
+display: grid;
+grid-template-columns:repeat(2, 1fr);
+grid-column-gap:7px;
+width:100%;  
+}
+
+}
+
+
+
+/*******************************************************************
+Max-width:768px and min-width:280px
+********************************************************************/
+@media only screen and (max-width:414px) and (min-width:280px){
+
+/* Categories grid */
+.category-container{
+display: grid;
+grid-template-columns:repeat(1, 1fr);
+grid-column-gap:7px;
+width:100%;  
+}
+
+}
