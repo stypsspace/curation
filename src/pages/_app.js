@@ -1,7 +1,7 @@
 import Layout from '@/components/layout';
 import '@/styles/globals.css';
 import '@/styles/custom.css';
-import '@/styles/styles.css'; 
+import '@/styles/animation.css'; 
 import 'typeface-inter';
 
 export default function App({ Component, pageProps }) {
