@@ -1,0 +1,36 @@
+/* styles.css
+.fade-in {
+    animation-name: fadeInAnimation;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+  }
+  
+  @keyframes fadeInAnimation {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }*/
+  
+
+  /* styles.css */
+.fade-in {
+  animation-name: fadeInAnimation;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(50px); /* Move up 50px from the bottom */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* Return to the original position */
+  }
+}

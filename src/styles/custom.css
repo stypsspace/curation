@@ -20,7 +20,7 @@ width:100%;
 color:#fff; */
 margin-top:10px; 
 padding-left:10px;
-padding-right:10px;  
+padding-right:10px; 
 }
 
 
@@ -196,7 +196,7 @@ width:100%;
 
 
 .site-footer-content{
-
+position: relative;
 }
 
 .site-footer-content p{

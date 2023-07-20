@@ -26,6 +26,7 @@ const Post = ({ post }) => {
 
   return (
     <div className='post-single-wrap'>
+<div className='fade-in'>
 
         <div className="post-single-header">
       <h3>{post.fields.title}</h3>
@@ -45,6 +46,8 @@ const Post = ({ post }) => {
             src={post.fields.coverImage.fields.file.url}
             width={400}
             height={300}
+            loading='lazy'
+          
           />
         )}
       </div>
@@ -65,7 +68,8 @@ const Post = ({ post }) => {
               layout='fixed'
               width={40}
               height={40}
-              className='author-name'
+              loading='lazy'
+              className='fade-in'
               alt={post.fields.author.fields.name}
             />
           )}
@@ -77,6 +81,7 @@ const Post = ({ post }) => {
         <RichText content={content} />
       </div>
 
+      </div>
     </div>
   );
 };

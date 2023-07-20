@@ -19,7 +19,7 @@ const Portfolio = ({ posts }) => {
         {posts.map((post) => {
           const { title, slug, coverImage, date, author, externalUrl } = post.fields;
           return (
-            <li key={slug}>
+            <li className='fade-in' key={slug}>
               <div className="post-header">
                 <h3>{title}</h3>
                 <span className='post-externalurl'>
@@ -38,6 +38,7 @@ const Portfolio = ({ posts }) => {
                       src={coverImage.fields.file.url}
                       width={400}
                       height={300}
+                      loading='lazy'
                     />
                   )}
                 </Link>
@@ -56,6 +57,7 @@ const Portfolio = ({ posts }) => {
                     layout='fixed'
                     width={40}
                     height={40}
+                    loading='lazy'
                     className='author-name'
                     alt={author.fields.name}
                   />
