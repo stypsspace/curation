@@ -52,6 +52,7 @@ const Post = ({ post }) => {
         )}
       </div>
 
+      <div className='post-date'>
       <time dateTime={new Date(post.fields.date).toISOString().slice(0, 10)}>
         {new Date(post.fields.date).toLocaleDateString('en-US', {
           day: '2-digit',
@@ -59,6 +60,7 @@ const Post = ({ post }) => {
           year: 'numeric',
         })}
       </time>
+      </div>
 
       <div className='author-name-wrap'>
         <div className='author-name'>

@@ -35,7 +35,7 @@ const Posts = ({ posts }) => {
           <button onClick={() => handleCategoryChange('Personal')}>Personal</button>
         </li>
         <li>
-          <button onClick={() => handleCategoryChange('Studio')}>Studio</button>
+          <button onClick={() => handleCategoryChange('App')}>App</button>
         </li>
         <li>
           <button onClick={() => handleCategoryChange('Commerce')}>Commerce</button>
@@ -58,7 +58,7 @@ const Post = ({ post }) => {
 
   return (
     <div className='posts-wrap'>
-    <li key={slug}>
+    <li className='fade-in' key={slug}>
 
      <div class="post-header">
       <h3>{title}</h3>
@@ -79,11 +79,14 @@ const Post = ({ post }) => {
               src={coverImage.fields.file.url}
               width={400}
               height={300}
+              loading='lazy'
+          
             />
           )}
         </Link>
       </div>
 
+      <div className='post-date'>
       <time dateTime={new Date(date).toISOString().slice(0, 10)}>
         {new Date(date).toLocaleDateString('en-US', {
           day: '2-digit',
@@ -91,6 +94,7 @@ const Post = ({ post }) => {
           year: 'numeric',
         })}
       </time>
+      </div>
 
       <div className='author-name-wrap'>
         <div className='author-name-image'>
@@ -99,7 +103,8 @@ const Post = ({ post }) => {
             layout='fixed'
             width={40}
             height={40}
-            className='author-name'
+            loading='lazy'
+            className='fade-in'
             alt={author.fields.name}
           />
         </div>

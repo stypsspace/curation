@@ -43,6 +43,8 @@ const Portfolio = ({ posts }) => {
                   )}
                 </Link>
               </div>
+
+              <div className='post-date'>
               <time dateTime={new Date(date).toISOString().slice(0, 10)}>
                 {new Date(date).toLocaleDateString('en-US', {
                   day: '2-digit',
@@ -50,6 +52,8 @@ const Portfolio = ({ posts }) => {
                   year: 'numeric',
                 })}
               </time>
+              </div>
+              
               <div className='author-name-wrap'>
               <div className='author-name-image'>
                   <ContentfulImage
