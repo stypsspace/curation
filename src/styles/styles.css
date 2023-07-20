@@ -1,4 +1,4 @@
-/* styles.css
+/* styles.css */
 .fade-in {
     animation-name: fadeInAnimation;
     animation-duration: 1s;
@@ -13,10 +13,10 @@
     to {
       opacity: 1;
     }
-  }*/
+  }
   
 
-  /* styles.css */
+  /* styles.css 
 .fade-in {
   animation-name: fadeInAnimation;
   animation-duration: 1s;
@@ -27,10 +27,10 @@
 @keyframes fadeInAnimation {
   from {
     opacity: 0;
-    transform: translateY(50px); /* Move up 50px from the bottom */
+    transform: translateY(50px); 
   }
   to {
     opacity: 1;
-    transform: translateY(0); /* Return to the original position */
+    transform: translateY(0); 
   }
-}
+}*/
