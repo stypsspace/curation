@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import client from 'src/lib/contentful';
 import Image from 'next/image';
@@ -59,6 +59,13 @@ const Posts = ({ posts }) => {
 
 const Post = ({ post }) => {
   const { title, slug, coverImage, video, date, author, externalUrl } = post.fields;
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play();
+    }
+  }, []);
 
   return (
     <div className='posts-wrap'>
@@ -67,7 +74,7 @@ const Post = ({ post }) => {
           <h3>{title}</h3>
           <span className='post-externalurl'>
             {externalUrl && (
-              <a href={externalUrl} target="_blank" rel="noopener noreferrer">
+              <a href={externalUrl} target='_blank' rel='noopener noreferrer'>
                 <button>Open</button>
               </a>
             )}
@@ -93,15 +100,13 @@ const Post = ({ post }) => {
             <Link href={`/posts/${slug}`} aria-label={title}>
               <div className='video-wrapper'>
                 <video
-                  id={`video-${slug}`}
                   className='video-player'
                   src={video.fields.file.url}
                   width={400}
                   height={300}
-                  autoPlay // Add autoPlay attribute to start video playback automatically on page load
                   loop // Add loop attribute to make the video play in a loop
                   preload='metadata' // Preload only the metadata for faster loading
-                  muted // Mute the video to prevent audio playback on page load
+                  ref={videoRef}
                 >
                   Your browser does not support the video tag.
                 </video>
@@ -121,18 +126,20 @@ const Post = ({ post }) => {
         </div>
 
         <div className='author-name-wrap'>
-          <div className='author-name-image'>
-            <ContentfulImage
-              src={author.fields.picture.fields.file.url}
-              layout='fixed'
-              width={40}
-              height={40}
-              loading='lazy'
-              className='fade-in'
-              alt={author.fields.name}
-            />
+          <div className='author-name'>
+            {author.fields.picture && (
+              <ContentfulImage
+                src={author.fields.picture.fields.file.url}
+                layout='fixed'
+                width={40}
+                height={40}
+                loading='lazy'
+                className='fade-in'
+                alt={author.fields.name}
+              />
+            )}
           </div>
-          <div className='author-name'>{author.fields.name}</div>
+          <div className='font-semibold'>{author.fields.name}</div>
         </div>
       </li>
     </div>

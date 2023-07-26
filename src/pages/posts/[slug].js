@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import RichText from 'src/components/ui/RichText';
 import { createClient } from 'contentful';
@@ -23,22 +23,6 @@ const ContentfulImage = (props) => {
 
 const Post = ({ post }) => {
   const router = useRouter();
-  const videoRef = useRef(null);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.addEventListener('canplay', handleVideoPlay);
-    }
-    return () => {
-      if (videoRef.current) {
-        videoRef.current.removeEventListener('canplay', handleVideoPlay);
-      }
-    };
-  }, []);
-
-  const handleVideoPlay = () => {
-    videoRef.current.play();
-  };
 
   if (!post || !post.fields) {
     // Handle the case where the post data is not available
@@ -75,22 +59,21 @@ const Post = ({ post }) => {
 
         {post.fields.video && (
           <div className='post-single-video'>
-            <div className='video-wrapper'>
-              <video
-                ref={videoRef}
-                className='video-player'
-                src={post.fields.video.fields.file.url}
-                width={400}
-                height={300}
-                autoPlay
-                loop
-                muted // Mute the video to prevent unwanted audio on page load
-                onClick={() => router.push(`/posts/${post.fields.slug}`)} // Navigate to post page on video click
-                playsInline // Add playsInline attribute to prevent picture-in-picture on mobile
-              >
-                Your browser does not support the video tag.
-              </video>
-            </div>
+            <Link href={`/posts/${slug}`} aria-label={title}>
+              <div className='video-wrapper'>
+                <video
+                  className='video-player'
+                  src={post.fields.video.fields.file.url}
+                  width={400}
+                  height={300}
+                  loop // Add loop attribute to make the video play in a loop
+                  preload='metadata' // Preload only the metadata for faster loading
+                  ref={videoRef}
+                >
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </Link>
           </div>
         )}
 
