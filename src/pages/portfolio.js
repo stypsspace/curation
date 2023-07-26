@@ -17,7 +17,7 @@ const Portfolio = ({ posts }) => {
       <h3 className='page-title'>Portfolio</h3>
       <ul className='category-container'>
         {posts.map((post) => {
-          const { title, slug, coverImage, date, author, externalUrl } = post.fields;
+          const { title, slug, coverImage, video, date, author, externalUrl } = post.fields;
           return (
             <li className='fade-in' key={slug}>
               <div className="post-header">
@@ -44,18 +44,38 @@ const Portfolio = ({ posts }) => {
                 </Link>
               </div>
 
+              {video && (
+                <div className='post-video'>
+                  <Link href={`/posts/${slug}`} aria-label={title}> {/* Move the Link component here */}
+                    <video
+                      id={`video-${slug}`}
+                      className='video-player'
+                      src={video.fields.file.url}
+                      width={400}
+                      height={300}
+                      autoPlay
+                      loop
+                      preload='metadata' // Preload only the metadata for faster loading
+                      muted // Mute the video to prevent audio playback on page load
+                    >
+                      Your browser does not support the video tag.
+                    </video>
+                  </Link>
+                </div>
+              )}
+
               <div className='post-date'>
-              <time dateTime={new Date(date).toISOString().slice(0, 10)}>
-                {new Date(date).toLocaleDateString('en-US', {
-                  day: '2-digit',
-                  month: '2-digit',
-                  year: 'numeric',
-                })}
-              </time>
+                <time dateTime={new Date(date).toISOString().slice(0, 10)}>
+                  {new Date(date).toLocaleDateString('en-US', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                  })}
+                </time>
               </div>
 
               <div className='author-name-wrap'>
-              <div className='author-name-image'>
+                <div className='author-name-image'>
                   <ContentfulImage
                     src={author.fields.picture.fields.file.url}
                     layout='fixed'
