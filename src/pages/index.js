@@ -91,7 +91,7 @@ const Post = ({ post }) => {
         {video && (
           <div className='post-video'>
             <Link href={`/posts/${slug}`} aria-label={title}> 
-            <Link href={`/posts/${slug}`} aria-label={title}> 
+            <div className='video-wrapper'>
               <video
                 id={`video-${slug}`}
                 className='video-player'
@@ -106,7 +106,7 @@ const Post = ({ post }) => {
               >
                 Your browser does not support the video tag.
               </video>
-            </Link>
+            </div>
             </Link>
           </div>
         )}
