@@ -84,6 +84,7 @@ const Post = ({ post }) => {
               autoPlay
               loop
               preload='metadata'
+              muted // Mute the video to prevent unwanted audio on page load
               onClick={() => router.push(`/posts/${post.fields.slug}`)} // Navigate to post page on video click
               playsInline // Add playsInline attribute to prevent picture-in-picture on mobile
             >
