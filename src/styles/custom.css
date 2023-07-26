@@ -270,7 +270,7 @@ Footer
 background: #070707;
 color:#333;
 
-height:200px;
+height:50px;
 width:100%;
 text-align:center;
 letter-spacing: -.3px;;
@@ -279,7 +279,8 @@ letter-spacing: -.3px;;
 
 .site-footer-content{
 position: relative;
-margin-top: 175px;
+/*margin-top: 175px;*/
+padding-top:20px;
 }
 
 .site-footer-content p{
