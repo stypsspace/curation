@@ -61,17 +61,21 @@ const Post = ({ post }) => {
         {post.fields.video && (
           <div className='post-single-video'>
             <div className='video-wrapper'>
-              <ReactPlayer
+              <video
                 className='video-player'
-                url={post.fields.video.fields.file.url}
+                src={post.fields.video.fields.file.url}
                 width={400}
                 height={300}
-                playing
+                autoPlay
                 loop
                 controls={false}
                 muted
-                playsinline
-              />
+                playsInline // Add playsInline attribute to prevent picture-in-picture on mobile
+                preload='metadata' // Preload only the metadata for faster loading
+                defer // Defer loading of the video until after the initial render
+              >
+                Your browser does not support the video tag.
+              </video>
             </div>
           </div>
         )}
