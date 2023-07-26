@@ -26,36 +26,36 @@ const Posts = ({ posts }) => {
     ? posts.filter((post) => post.fields.category === selectedCategory)
     : posts;
 
-    return (
-      <div className='filter-container-wrap'>
-        <ul className='filter-container'>
-          <li>
-            <button onClick={() => handleCategoryChange('')}>All</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('Portfolio')}>Portfolio</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('Personal')}>Personal</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('App')}>App</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('Commerce')}>Commerce</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('Technology')}>Technology</button>
-          </li>
-        </ul>
-        <ul className='category-container'>
-          {filteredPosts.map((post) => (
-            <Post key={post.fields.slug} post={post} />
-          ))}
-        </ul>
-      </div>
-    );
-  };
+  return (
+    <div className='filter-container-wrap'>
+      <ul className='filter-container'>
+        <li>
+          <button onClick={() => handleCategoryChange('')}>All</button>
+        </li>
+        <li>
+          <button onClick={() => handleCategoryChange('Portfolio')}>Portfolio</button>
+        </li>
+        <li>
+          <button onClick={() => handleCategoryChange('Personal')}>Personal</button>
+        </li>
+        <li>
+          <button onClick={() => handleCategoryChange('App')}>App</button>
+        </li>
+        <li>
+          <button onClick={() => handleCategoryChange('Commerce')}>Commerce</button>
+        </li>
+        <li>
+          <button onClick={() => handleCategoryChange('Technology')}>Technology</button>
+        </li>
+      </ul>
+      <ul className='category-container'>
+        {filteredPosts.map((post) => (
+          <Post key={post.fields.slug} post={post} />
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 const Post = ({ post }) => {
   const { title, slug, coverImage, video, date, author, externalUrl } = post.fields;
@@ -89,23 +89,24 @@ const Post = ({ post }) => {
         </div>
 
         {video && (
-      <div className='post-video'>
-        <Link href={`/posts/${slug}`} aria-label={title}> {/* Move the Link component here */}
-        <video
-          id={`video-${slug}`}
-          className='video-player'
-          src={video.fields.file.url}
-          width={400}
-          height={300}
-          autoPlay
-          loop
-          preload='metadata' // Preload only the metadata for faster loading
-        >
-          Your browser does not support the video tag.
-        </video>
-        </Link>
-      </div>
-    )}
+          <div className='post-video'>
+            <Link href={`/posts/${slug}`} aria-label={title}> {/* Move the Link component here */}
+              <video
+                id={`video-${slug}`}
+                className='video-player'
+                src={video.fields.file.url}
+                width={400}
+                height={300}
+                autoPlay
+                loop
+                preload='metadata' // Preload only the metadata for faster loading
+                muted // Mute the video to prevent audio playback on page load
+              >
+                Your browser does not support the video tag.
+              </video>
+            </Link>
+          </div>
+        )}
 
         <div className='post-date'>
           <time dateTime={new Date(date).toISOString().slice(0, 10)}>
