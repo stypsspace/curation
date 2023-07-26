@@ -268,17 +268,20 @@ Footer
 .site-footer{
 /*background: #f3f3f3;*/
 background: #070707;
-height:50px;
+color:#333;
+
+height:200px;
 width:100%;
+text-align:center;
+letter-spacing: -.3px;;
 }
 
 
 .site-footer-content{
 position: relative;
+margin-top: 175px;
 }
 
 .site-footer-content p{
 position: relative;  
-padding-top:20px;
-padding-left:10px;
 }
