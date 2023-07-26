@@ -250,7 +250,8 @@ margin-top:50px;
 
 
 
-.button-container{
+.button-container,
+.custom-button{
 display:none !important;  
 }
 
