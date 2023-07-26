@@ -36,7 +36,7 @@ const Layout = ({ children }) => {
 
       <footer className='site-footer'>
         <div className='site-footer-content'>
-          <p>Made by Styps</p>
+          <p>©2023 Styps Ltd</p>
         </div>
       </footer>
 

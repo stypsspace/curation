@@ -44,10 +44,30 @@ h3{
   font-size:14px;  
     }
  
+    body{
+     background: #070707;
+     color:#fefefe; 
+    }
+
+
+    body button{
+      color:#fefefe;  
+    }
+
+    body header ul li a{
+      color:#fefefe; 
+    }
+
+
+    body footer{
+      background: #070707;
+    }
 
 /*************************************************************************
 Globals
 **************************************************************************/
+
+
 
 html, body {
   height: 100%;
