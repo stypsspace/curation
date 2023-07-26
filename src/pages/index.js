@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import client from 'src/lib/contentful';
 import Image from 'next/image';
+import ReactPlayer from 'react-player';
 
 const contentfulLoader = ({ src, width, quality }) => {
   const fileType = src.split('.').pop();
@@ -99,17 +100,17 @@ const Post = ({ post }) => {
           <div className='post-video'>
             <Link href={`/posts/${slug}`} aria-label={title}>
               <div className='video-wrapper'>
-                <video
+                <ReactPlayer
                   className='video-player'
-                  src={video.fields.file.url}
+                  url={video.fields.file.url}
                   width={400}
                   height={300}
-                  loop // Add loop attribute to make the video play in a loop
-                  preload='metadata' // Preload only the metadata for faster loading
-                  ref={videoRef}
-                >
-                  Your browser does not support the video tag.
-                </video>
+                  playing
+                  loop
+                  controls={false}
+                  muted
+                  playsinline
+                />
               </div>
             </Link>
           </div>

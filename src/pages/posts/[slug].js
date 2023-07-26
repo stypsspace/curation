@@ -3,6 +3,7 @@ import Image from 'next/image';
 import RichText from 'src/components/ui/RichText';
 import { createClient } from 'contentful';
 import { useRouter } from 'next/router';
+import ReactPlayer from 'react-player';
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -59,21 +60,19 @@ const Post = ({ post }) => {
 
         {post.fields.video && (
           <div className='post-single-video'>
-            <Link href={`/posts/${slug}`} aria-label={title}>
-              <div className='video-wrapper'>
-                <video
-                  className='video-player'
-                  src={post.fields.video.fields.file.url}
-                  width={400}
-                  height={300}
-                  loop // Add loop attribute to make the video play in a loop
-                  preload='metadata' // Preload only the metadata for faster loading
-                  ref={videoRef}
-                >
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            </Link>
+            <div className='video-wrapper'>
+              <ReactPlayer
+                className='video-player'
+                url={post.fields.video.fields.file.url}
+                width={400}
+                height={300}
+                playing
+                loop
+                controls={false}
+                muted
+                playsinline
+              />
+            </div>
           </div>
         )}
 
