@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import RichText from 'src/components/ui/RichText';
 import { createClient } from 'contentful';
@@ -23,6 +23,22 @@ const ContentfulImage = (props) => {
 
 const Post = ({ post }) => {
   const router = useRouter();
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.addEventListener('canplay', handleVideoPlay);
+    }
+    return () => {
+      if (videoRef.current) {
+        videoRef.current.removeEventListener('canplay', handleVideoPlay);
+      }
+    };
+  }, []);
+
+  const handleVideoPlay = () => {
+    videoRef.current.play();
+  };
 
   if (!post || !post.fields) {
     // Handle the case where the post data is not available
@@ -60,6 +76,7 @@ const Post = ({ post }) => {
         {post.fields.video && (
           <div className='post-single-video'>
             <video
+              ref={videoRef}
               className='video-player'
               src={post.fields.video.fields.file.url}
               width={400}
