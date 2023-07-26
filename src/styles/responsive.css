@@ -43,3 +43,14 @@ width:100%;
 }
 
 }
+
+
+/*******************************************************************
+Video: Max-width:768px
+********************************************************************/
+@media (max-width: 768px) { 
+.video-player {
+pointer-events: none; /* Disable click/tap events on the video element */
+controls: none; /* Hide the video controls */
+}
+}

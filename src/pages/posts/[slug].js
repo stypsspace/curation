@@ -68,6 +68,7 @@ const Post = ({ post }) => {
               loop
               preload='metadata'
               onClick={() => router.push(`/posts/${post.fields.slug}`)} // Navigate to post page on video click
+              playsInline // Add playsInline attribute to prevent picture-in-picture on mobile
             >
               Your browser does not support the video tag.
             </video>
