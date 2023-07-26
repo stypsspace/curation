@@ -46,7 +46,8 @@ const Personal = ({ posts }) => {
 
               {video && (
                 <div className='post-video'>
-                  <Link href={`/posts/${slug}`} aria-label={title}> {/* Move the Link component here */}
+                  <Link href={`/posts/${slug}`} aria-label={title}> 
+                  <Link href={`/posts/${slug}`} aria-label={title}> 
                     <video
                       id={`video-${slug}`}
                       className='video-player'
@@ -61,6 +62,7 @@ const Personal = ({ posts }) => {
                     >
                       Your browser does not support the video tag.
                     </video>
+                  </Link>
                   </Link>
                 </div>
               )}
