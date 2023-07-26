@@ -75,21 +75,22 @@ const Post = ({ post }) => {
 
         {post.fields.video && (
           <div className='post-single-video'>
-            <video
-              ref={videoRef}
-              className='video-player'
-              src={post.fields.video.fields.file.url}
-              width={400}
-              height={300}
-              autoPlay
-              loop
-              preload='metadata'
-              muted // Mute the video to prevent unwanted audio on page load
-              onClick={() => router.push(`/posts/${post.fields.slug}`)} // Navigate to post page on video click
-              playsInline // Add playsInline attribute to prevent picture-in-picture on mobile
-            >
-              Your browser does not support the video tag.
-            </video>
+            <div className='video-wrapper'>
+              <video
+                ref={videoRef}
+                className='video-player'
+                src={post.fields.video.fields.file.url}
+                width={400}
+                height={300}
+                autoPlay
+                loop
+                muted // Mute the video to prevent unwanted audio on page load
+                onClick={() => router.push(`/posts/${post.fields.slug}`)} // Navigate to post page on video click
+                playsInline // Add playsInline attribute to prevent picture-in-picture on mobile
+              >
+                Your browser does not support the video tag.
+              </video>
+            </div>
           </div>
         )}
 
