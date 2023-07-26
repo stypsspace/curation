@@ -182,8 +182,8 @@ width:50%;
 
 .post-single-image{
 position: relative;
-width:50%;
-float:left;
+width:80%;
+/*float:left;*/
 }
 
 .post-single-image img{
@@ -195,7 +195,7 @@ height:auto;
 .post-single-content{
 position: relative;
 width:50%;
-float:left;
+/*float:left;*/
 padding-left:10px;
 }
 
@@ -216,8 +216,8 @@ width:100%;
  /* Wrap */
 .post-single-video{
   position: relative;
-  width:50%;
-  float:left; 
+  width:80%;
+  /*float:left; */
 }
 
 
