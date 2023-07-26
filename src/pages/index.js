@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import client from 'src/lib/contentful';
 import Image from 'next/image';
@@ -16,6 +16,22 @@ const ContentfulImage = (props) => {
 };
 
 const Posts = ({ posts }) => {
+  useEffect(() => {
+    const videos = document.querySelectorAll('.video-player');
+
+    videos.forEach((video) => {
+      video.muted = true; // Mute the videos
+      video.loop = true; // Set the loop to true
+      video.preload = 'metadata'; // Preload only the metadata for faster loading
+      video.addEventListener('loadedmetadata', () => {
+        // Start playback on loadedmetadata event
+        video.play().catch((error) => {
+          console.error('Error starting video playback:', error);
+        });
+      });
+    });
+  }, []);
+
   const [selectedCategory, setSelectedCategory] = useState('');
 
   const handleCategoryChange = (category) => {
@@ -63,11 +79,11 @@ const Post = ({ post }) => {
   return (
     <div className='posts-wrap'>
       <li className='fade-in' key={slug}>
-        <div className="post-header">
+        <div className='post-header'>
           <h3>{title}</h3>
           <span className='post-externalurl'>
             {externalUrl && (
-              <a href={externalUrl} target="_blank" rel="noopener noreferrer">
+              <a href={externalUrl} target='_blank' rel='noopener noreferrer'>
                 <button>Open</button>
               </a>
             )}
@@ -90,23 +106,23 @@ const Post = ({ post }) => {
 
         {video && (
           <div className='post-video'>
-            <Link href={`/posts/${slug}`} aria-label={title}> 
-            <div className='video-wrapper'>
-              <video
-                id={`video-${slug}`}
-                className='video-player'
-                src={video.fields.file.url}
-                width={400}
-                height={300}
-                autoPlay
-                loop
-                preload='metadata' // Preload only the metadata for faster loading
-                muted // Mute the video to prevent audio playback on page load
-                playsInline // Add playsInline attribute to prevent picture-in-picture on mobile
-              >
-                Your browser does not support the video tag.
-              </video>
-            </div>
+            <Link href={`/posts/${slug}`} aria-label={title}>
+              <div className='video-wrapper'>
+                <video
+                  id={`video-${slug}`}
+                  className='video-player'
+                  src={video.fields.file.url}
+                  width={400}
+                  height={300}
+                  autoPlay
+                  loop
+                  preload='metadata' // Preload only the metadata for faster loading
+                  muted // Mute the video to prevent audio playback on page load
+                  playsInline // Add playsInline attribute to prevent picture-in-picture on mobile
+                >
+                  Your browser does not support the video tag.
+                </video>
+              </div>
             </Link>
           </div>
         )}
