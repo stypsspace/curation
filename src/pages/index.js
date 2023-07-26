@@ -89,21 +89,23 @@ const Post = ({ post }) => {
         </div>
 
         {video && (
-          <div className='post-video'>
-            <video
-              src={video.fields.file.url}
-              controls // Add controls to show video player controls
-              width={400}
-              height={300}
-              autoPlay // Optional: Add autoPlay attribute if you want the video to start playing automatically
-              muted // Optional: Add muted attribute if you want the video to be muted by default
-              loop // Optional: Add loop attribute if you want the video to loop
-              loading='lazy'
-            >
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        )}
+      <div className='post-video'>
+        <Link href={`/posts/${slug}`} aria-label={title}> {/* Move the Link component here */}
+        <video
+          id={`video-${slug}`}
+          className='video-player'
+          src={video.fields.file.url}
+          width={400}
+          height={300}
+          autoPlay
+          loop
+          preload='metadata' // Preload only the metadata for faster loading
+        >
+          Your browser does not support the video tag.
+        </video>
+        </Link>
+      </div>
+    )}
 
         <div className='post-date'>
           <time dateTime={new Date(date).toISOString().slice(0, 10)}>

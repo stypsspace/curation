@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import RichText from 'src/components/ui/RichText';
 import { createClient } from 'contentful';
+import { useRouter } from 'next/router';
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -9,6 +10,10 @@ const client = createClient({
 });
 
 function contentfulLoader({ src, width, quality }) {
+  const fileType = src.split('.').pop();
+  if (fileType === 'mp4') {
+    return src; // Return video URL directly
+  }
   return `${src}?w=${width}&q=${quality || 75}`;
 }
 
@@ -17,6 +22,8 @@ const ContentfulImage = (props) => {
 };
 
 const Post = ({ post }) => {
+  const router = useRouter();
+
   if (!post || !post.fields) {
     // Handle the case where the post data is not available
     return null;
@@ -26,75 +33,77 @@ const Post = ({ post }) => {
 
   return (
     <div className='post-single-wrap'>
-<div className='fade-in'>
+      <div className='fade-in'>
+        <div className='post-single-header'>
+          <h3>{post.fields.title}</h3>
+          <span className='post-externalurl'>
+            {externalUrl && (
+              <a href={externalUrl} target='_blank' rel='noopener noreferrer' className='mt-4 text-blue-500 underline'>
+                Open
+              </a>
+            )}
+          </span>
+        </div>
 
-        <div className="post-single-header">
-      <h3>{post.fields.title}</h3>
-      <span classNameName='post-externalurl'>
-        {externalUrl && (
-          <a href={externalUrl} target='_blank' rel='noopener noreferrer' className='mt-4 text-blue-500 underline'>
-            Open
-          </a>
-        )}
-      </span>
-      </div>
-
-      <div className='post-single-image'>
-        {post.fields.coverImage?.fields?.file && (
-          <ContentfulImage
-            alt={`Cover Image for ${post.fields.title}`}
-            src={post.fields.coverImage.fields.file.url}
-            width={400}
-            height={300}
-            loading='lazy'
-          
-          />
-        )}
-      </div>
-
-
-
-
-
-      <div className='post-single-content'>
-
-      <div className='post-date'>
-      <time dateTime={new Date(post.fields.date).toISOString().slice(0, 10)}>
-        {new Date(post.fields.date).toLocaleDateString('en-US', {
-          day: '2-digit',
-          month: '2-digit',
-          year: 'numeric',
-        })}
-      </time>
-      </div>
-
-      <div className='author-name-wrap'>
-        <div className='author-name'>
-          {post.fields.author?.fields?.picture?.fields?.file && (
+        <div className='post-single-image'>
+          {post.fields.coverImage?.fields?.file && (
             <ContentfulImage
-              src={post.fields.author.fields.picture.fields.file.url}
-              layout='fixed'
-              width={40}
-              height={40}
+              alt={`Cover Image for ${post.fields.title}`}
+              src={post.fields.coverImage.fields.file.url}
+              width={400}
+              height={300}
               loading='lazy'
-              className='fade-in'
-              alt={post.fields.author.fields.name}
             />
           )}
         </div>
-        <div className='font-semibold'>{name}</div>
-      </div>
 
-      <div className='post-single-content'>
-        <RichText content={content} />
-      </div>
-</div>
+        {post.fields.video && (
+          <div className='post-single-video'>
+            <video
+              className='video-player'
+              src={post.fields.video.fields.file.url}
+              width={400}
+              height={300}
+              autoPlay
+              loop
+              preload='metadata'
+              onClick={() => router.push(`/posts/${post.fields.slug}`)} // Navigate to post page on video click
+            >
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        )}
 
+        <div className='post-date'>
+          <time dateTime={new Date(post.fields.date).toISOString().slice(0, 10)}>
+            {new Date(post.fields.date).toLocaleDateString('en-US', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+            })}
+          </time>
+        </div>
 
+        <div className='author-name-wrap'>
+          <div className='author-name'>
+            {post.fields.author?.fields?.picture?.fields?.file && (
+              <ContentfulImage
+                src={post.fields.author.fields.picture.fields.file.url}
+                layout='fixed'
+                width={40}
+                height={40}
+                loading='lazy'
+                className='fade-in'
+                alt={post.fields.author.fields.name}
+              />
+            )}
+          </div>
+          <div className='font-semibold'>{name}</div>
+        </div>
 
-
-
-
+        <div className='post-single-content'>
+          <RichText content={content} />
+        </div>
       </div>
     </div>
   );

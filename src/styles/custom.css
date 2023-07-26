@@ -205,6 +205,51 @@ width:100%;
 }
 
 
+
+
+
+
+/*************************************************************************
+ Video. 
+ *************************************************************************/
+
+ /* Wrap */
+.post-single-video{
+  position: relative;
+  width:50%;
+  float:left; 
+}
+
+
+
+ /* styles.css or your preferred CSS file */
+.video-player {
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+}
+
+.video-player video {
+  width: 100%;
+  height: auto;
+  outline: none; /* Remove the focus outline when clicked */
+}
+
+.video-player video::-webkit-media-controls-start-playback-button {
+  display: none; /* Hide the play button in Safari */
+}
+
+/* Hide default controls */
+.video-player video::-webkit-media-controls {
+  display: none;
+}
+
+
+
+
+
+
+
 /*************************************************************************
  Categories page 
  *************************************************************************/
