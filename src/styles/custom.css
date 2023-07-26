@@ -236,8 +236,8 @@ margin-top:50px;
 .video-player {
   cursor: pointer;
   position: relative;
-  width: 100%;
-  height: auto;
+  width: 100% !important;
+  height: auto !important;
 }
 
 .video-player video {
