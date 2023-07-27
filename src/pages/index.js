@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import client from 'src/lib/contentful';
 import Image from 'next/image';
@@ -22,6 +22,20 @@ const Posts = ({ posts }) => {
   const filteredPosts = selectedCategory
     ? posts.filter((post) => post.fields.category === selectedCategory)
     : posts;
+
+  useEffect(() => {
+    // Loop through all the video elements on the page
+    const videoElements = document.querySelectorAll('.video-player');
+
+    // Capture the first frame of each video and set it as the poster
+    videoElements.forEach((video) => {
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+      video.poster = canvas.toDataURL();
+    });
+  }, []);
 
   return (
     <div>
