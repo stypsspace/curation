@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import RichText from 'src/components/ui/RichText';
 import { createClient } from 'contentful';
-import ReactPlayer from 'react-player';
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -64,17 +63,19 @@ const Post = ({ post, relatedPosts }) => {
         {post.fields.video && (
           <div className='post-single-video'>
             <div className='video-wrapper'>
-              <ReactPlayer
+              <video
                 className='video-player'
-                url={post.fields.video.fields.file.url}
+                src={post.fields.video.fields.file.url}
                 width={400}
                 height={300}
-                playing
+                autoPlay
                 loop
                 controls={false}
                 muted
                 playsInline
-              />
+              >
+                Your browser does not support the video tag.
+              </video>
             </div>
           </div>
         )}
@@ -134,21 +135,23 @@ const Post = ({ post, relatedPosts }) => {
 
                 {/* Check if the related post has a video */}
                 <Link href={`/posts/${relatedPost.fields.slug}`}>
-                {relatedPost.fields.video && (
-                  <div className='related-post-video'>
-                    <ReactPlayer
-                      className='video-player'
-                      url={relatedPost.fields.video.fields.file.url}
-                      width={200}
-                      height={150}
-                      playing
-                      loop
-                      controls={false}
-                      muted
-                      playsInline
-                    />
-                  </div>
-                )}
+                  {relatedPost.fields.video && (
+                    <div className='related-post-video'>
+                      <video
+                        className='video-player'
+                        src={relatedPost.fields.video.fields.file.url}
+                        width={200}
+                        height={150}
+                        autoPlay
+                        loop
+                        controls={false}
+                        muted
+                        playsInline
+                      >
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                  )}
                 </Link>
               </li>
             ))}
