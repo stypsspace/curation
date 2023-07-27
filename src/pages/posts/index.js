@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import client from 'src/lib/contentful';
 import Image from 'next/image';
@@ -12,19 +12,52 @@ const ContentfulImage = (props) => {
 };
 
 const Posts = ({ posts }) => {
+  const [selectedCategory, setSelectedCategory] = useState('');
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
+
+  // Filter posts based on the selected category
+  const filteredPosts = selectedCategory
+    ? posts.filter((post) => post.fields.category === selectedCategory)
+    : posts;
+
   return (
     <div>
-      <h3 className='page-title'>All Posts</h3>
+      <div className='filter-container-wrap'>
+        <ul className='filter-container'>
+          <li>
+            <button onClick={() => handleCategoryChange('')}>All</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('Portfolio')}>Portfolio</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('Personal')}>Personal</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('App')}>App</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('Commerce')}>Commerce</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('Technology')}>Technology</button>
+          </li>
+        </ul>
+      </div>
+
       <ul className='category-container'>
-        {posts.map((post) => {
+        {filteredPosts.map((post) => {
           const { title, slug, coverImage, video, date, author, externalUrl } = post.fields;
           return (
             <li className='fade-in' key={slug}>
-              <div className="post-header">
+              <div className='post-header'>
                 <h3>{title}</h3>
                 <span className='post-externalurl'>
                   {externalUrl && (
-                    <a href={externalUrl} target="_blank" rel="noopener noreferrer">
+                    <a href={externalUrl} target='_blank' rel='noopener noreferrer'>
                       <button>Open</button>
                     </a>
                   )}
