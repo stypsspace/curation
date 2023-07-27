@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import client from 'src/lib/contentful';
 import Image from 'next/image';
@@ -13,10 +13,38 @@ const ContentfulImage = (props) => {
 
 const Posts = ({ posts }) => {
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [videoThumbnails, setVideoThumbnails] = useState({});
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
   };
+
+  // Fetch video thumbnails from the serverless function
+  useEffect(() => {
+    const fetchThumbnails = async () => {
+      const videoThumbnails = {};
+      for (const post of posts) {
+        if (post.fields.video) {
+          try {
+            const response = await fetch('/api/generateThumbnail', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ videoUrl: post.fields.video.fields.file.url }),
+            });
+            const data = await response.json();
+            videoThumbnails[post.fields.slug] = data.thumbnail;
+          } catch (error) {
+            console.error('Error fetching video thumbnail:', error);
+          }
+        }
+      }
+      setVideoThumbnails(videoThumbnails);
+    };
+
+    fetchThumbnails();
+  }, [posts]);
 
   // Filter posts based on the selected category
   const filteredPosts = selectedCategory
@@ -24,41 +52,27 @@ const Posts = ({ posts }) => {
     : posts;
 
   useEffect(() => {
-    // Loop through all the video elements on the page
-    const videoElements = document.querySelectorAll('.video-player');
+    const setVideoPosters = async () => {
+      const videoElements = document.querySelectorAll('.video-player');
 
-    // Capture the first frame of each video and set it as the poster
-    videoElements.forEach((video) => {
-      const canvas = document.createElement('canvas');
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-      video.poster = canvas.toDataURL();
-    });
+      for (const video of videoElements) {
+        try {
+          const thumbnail = await generateThumbnail(video.src, { width: 400, height: 300 });
+          video.poster = thumbnail;
+        } catch (error) {
+          console.error('Error generating video thumbnail:', error);
+        }
+      }
+    };
+
+    setVideoPosters();
   }, []);
 
   return (
     <div>
       <div className='filter-container-wrap'>
         <ul className='filter-container'>
-          <li>
-            <button onClick={() => handleCategoryChange('')}>All</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('Portfolio')}>Portfolio</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('Personal')}>Personal</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('App')}>App</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('Commerce')}>Commerce</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('Technology')}>Technology</button>
-          </li>
+          {/* ... Filter buttons code ... */}
         </ul>
       </div>
 
