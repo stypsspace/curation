@@ -100,7 +100,7 @@ const Post = ({ post }) => {
           <div className='post-video'>
             <Link href={`/posts/${slug}`} aria-label={title}>
               <div className='video-wrapper'>
-              <video
+                <ReactPlayer
                   className='video-player'
                   url={video.fields.file.url} // Use the Contentful video URL
                   width={400}

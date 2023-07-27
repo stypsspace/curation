@@ -64,7 +64,7 @@ const Post = ({ post, relatedPosts }) => {
         {post.fields.video && (
           <div className='post-single-video'>
             <div className='video-wrapper'>
-            <video
+              <ReactPlayer
                 className='video-player'
                 url={post.fields.video.fields.file.url}
                 width={400}
@@ -136,7 +136,7 @@ const Post = ({ post, relatedPosts }) => {
                 <Link href={`/posts/${relatedPost.fields.slug}`}>
                 {relatedPost.fields.video && (
                   <div className='related-post-video'>
-                     <video
+                    <ReactPlayer
                       className='video-player'
                       url={relatedPost.fields.video.fields.file.url}
                       width={200}
