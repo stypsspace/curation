@@ -74,7 +74,6 @@ const Post = ({ post, relatedPosts }) => {
                 muted
                 playsInline
               >
-                Your browser does not support the video tag.
               </video>
             </div>
           </div>
@@ -148,7 +147,6 @@ const Post = ({ post, relatedPosts }) => {
                         muted
                         playsInline
                       >
-                        Your browser does not support the video tag.
                       </video>
                     </div>
                   )}

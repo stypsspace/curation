@@ -15,7 +15,7 @@ Posts.
 /*******************************************************************
 Max-width:768px and min-width:280px
 ********************************************************************/
-@media only screen and (max-width:800px) and (min-width:415px){
+@media only screen and (max-width:1024px) and (min-width:768px){
 
 /* Categories grid */
 .category-container{
@@ -39,30 +39,34 @@ ul.related-posts-content{
 
 
 
+
 /*******************************************************************
 Max-width:768px and min-width:280px
 ********************************************************************/
-@media only screen and (max-width:414px) and (min-width:0px){
+@media only screen and (max-width:768px) and (min-width:0px){
 
-/* Categories grid */
-.category-container{
-display: grid;
-grid-template-columns:repeat(1, 1fr);
-grid-column-gap:7px;
-width:100%;  
-}
-
-/* Content */
-ul.related-posts-content{
-    position:relative;  
+    /* Categories grid */
+    .category-container{
     display: grid;
     grid-template-columns:repeat(1, 1fr);
     grid-column-gap:7px;
     width:100%;  
-    padding-top:50px;
+    }
+    
+    /* Content */
+    ul.related-posts-content{
+        position:relative;  
+        display: grid;
+        grid-template-columns:repeat(1, 1fr);
+        grid-column-gap:7px;
+        width:100%;  
+        padding-top:50px;
+        }
+    
     }
 
-}
+
+
 
 
 

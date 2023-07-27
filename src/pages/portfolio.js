@@ -60,7 +60,6 @@ const Portfolio = ({ posts }) => {
                       muted // Mute the video to prevent audio playback on page load
                       playsInline // Add playsInline attribute to prevent picture-in-picture on mobile
                     >
-                      Your browser does not support the video tag.
                     </video>
                   </div>
                   </Link>
