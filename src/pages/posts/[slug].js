@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import RichText from 'src/components/ui/RichText';
 import { createClient } from 'contentful';
 import { useRouter } from 'next/router';
@@ -22,9 +23,7 @@ const ContentfulImage = (props) => {
   return <Image loader={contentfulLoader} {...props} />;
 };
 
-const Post = ({ post }) => {
-  const router = useRouter();
-
+const Post = ({ post, relatedPosts }) => {
   if (!post || !post.fields) {
     // Handle the case where the post data is not available
     return null;
@@ -61,21 +60,17 @@ const Post = ({ post }) => {
         {post.fields.video && (
           <div className='post-single-video'>
             <div className='video-wrapper'>
-              <video
+              <ReactPlayer
                 className='video-player'
-                src={post.fields.video.fields.file.url}
+                url={post.fields.video.fields.file.url}
                 width={400}
                 height={300}
-                autoPlay
+                playing
                 loop
                 controls={false}
                 muted
-                playsInline // Add playsInline attribute to prevent picture-in-picture on mobile
-                preload='metadata' // Preload only the metadata for faster loading
-                defer // Defer loading of the video until after the initial render
-              >
-                Your browser does not support the video tag.
-              </video>
+                playsInline
+              />
             </div>
           </div>
         )}
@@ -110,6 +105,49 @@ const Post = ({ post }) => {
         <div className='post-single-content'>
           <RichText content={content} />
         </div>
+
+        {/* Display related posts */}
+        <div className='related-posts-wrap'>
+          <h3 className='related-posts-title'>Related Posts</h3>
+
+          <ul className='related-posts-content'>
+            {relatedPosts.map((relatedPost) => (
+              <li key={relatedPost.fields.slug}>
+                <div className='related-posts-header'>
+                  <Link href={`/posts/${relatedPost.fields.slug}`}>
+                    {relatedPost.fields.title}
+                  </Link>
+
+                  {/* Check if externalUrl exists in the related post */}
+                  {relatedPost.fields.externalUrl && (
+                    <span className='related-posts-externalurl'>
+                      <a href={relatedPost.fields.externalUrl} target='_blank' rel='noopener noreferrer'>
+                        <button>Open</button>
+                      </a>
+                    </span>
+                  )}
+                </div>
+
+                {/* Check if the related post has a video */}
+                {relatedPost.fields.video && (
+                  <div className='related-post-video'>
+                    <ReactPlayer
+                      className='video-player'
+                      url={relatedPost.fields.video.fields.file.url}
+                      width={200}
+                      height={150}
+                      playing
+                      loop
+                      controls={false}
+                      muted
+                      playsInline
+                    />
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );
@@ -137,6 +175,21 @@ export const getStaticProps = async ({ params }) => {
 
   const post = response.items[0];
 
+  // Fetch all posts with the same category
+  const allPostsResponse = await client.getEntries({
+    content_type: 'post',
+    'fields.category': post.fields.category, // Replace 'category' with the actual field name for the category
+  });
+
+  // Filter only the posts that have a 'video' field
+  const relatedPosts = allPostsResponse.items.filter((item) => item.fields.video);
+
+  // Remove the current post from the related posts array
+  const filteredRelatedPosts = relatedPosts.filter((item) => item.sys.id !== post.sys.id);
+
+  // Limit the number of related posts to 5
+  const limitedRelatedPosts = filteredRelatedPosts.slice(0, 5);
+
   return {
     props: {
       post: {
@@ -145,8 +198,10 @@ export const getStaticProps = async ({ params }) => {
           externalUrl: post.fields.externalUrl || '',
         },
       },
+      relatedPosts: limitedRelatedPosts,
     },
   };
 };
 
 export default Post;
+
