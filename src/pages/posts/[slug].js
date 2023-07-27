@@ -23,21 +23,14 @@ const ContentfulImage = (props) => {
 };
 
 const Post = ({ post, relatedPosts }) => {
-  if (!post || !post.fields) {
-    // Handle the case where the post data is not available (server-side)
-    return null;
-  }
-
   const { content, name, externalUrl } = post.fields;
 
-  // Use useState and useEffect to check if we're on the client-side
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     setIsClient(true);
   }, []);
 
   if (!isClient) {
-    // Return null or a loading state while waiting for client-side rendering
     return null;
   }
 
@@ -217,4 +210,3 @@ export const getStaticProps = async ({ params }) => {
 };
 
 export default Post;
-

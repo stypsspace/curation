@@ -33,26 +33,41 @@ const Posts = ({ posts }) => {
     ? posts.filter((post) => post.fields.category === selectedCategory)
     : posts;
 
-  return (
-    <div className='filter-container-wrap'>
-      <ul className='filter-container'>
-        <li>
-          <button onClick={() => handleCategoryChange('')}>All</button>
-        </li>
-        {/* Add your category buttons here */}
-      </ul>
-      <ul className='category-container'>
-        {filteredPosts.map((post) => (
-          <Post key={post.fields.slug} post={post} />
-        ))}
-      </ul>
-    </div>
-  );
-};
+    return (
+      <div className='filter-container-wrap'>
+        <ul className='filter-container'>
+          <li>
+            <button onClick={() => handleCategoryChange('')}>All</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('Portfolio')}>Portfolio</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('Personal')}>Personal</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('App')}>App</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('Commerce')}>Commerce</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('Technology')}>Technology</button>
+          </li>
+        </ul>
+        <ul className='category-container'>
+          {filteredPosts.map((post) => (
+            <Post key={post.fields.slug} post={post} />
+          ))}
+        </ul>
+      </div>
+    );
+  };
 
 const Post = ({ post }) => {
   const { title, slug, coverImage, video, date, author, externalUrl } = post.fields;
 
+  // Client-side rendering: Render the component once data is available
   return (
     <div className='posts-wrap'>
       <li className='fade-in' key={slug}>
