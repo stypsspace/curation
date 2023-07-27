@@ -8,12 +8,13 @@ Reset
   }
   
   :host{
-  display:none !important
+  display:none !important;
   }
 
   #detach-button-host{
-  display:none !important 
+  display:none !important; 
   }
+  
   img, svg {
   display:block;
   max-width:100%;   
