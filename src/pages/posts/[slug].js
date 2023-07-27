@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import RichText from 'src/components/ui/RichText';
 import { createClient } from 'contentful';
-import { useRouter } from 'next/router';
 import ReactPlayer from 'react-player';
 
 const client = createClient({
@@ -25,12 +24,24 @@ const ContentfulImage = (props) => {
 
 const Post = ({ post, relatedPosts }) => {
   if (!post || !post.fields) {
-    // Handle the case where the post data is not available
+    // Handle the case where the post data is not available (server-side)
     return null;
   }
 
   const { content, name, externalUrl } = post.fields;
 
+  // Use useState and useEffect to check if we're on the client-side
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    // Return null or a loading state while waiting for client-side rendering
+    return null;
+  }
+
+  // Client-side rendering: Render the component once data is available
   return (
     <div className='post-single-wrap'>
       <div className='fade-in'>
@@ -129,6 +140,7 @@ const Post = ({ post, relatedPosts }) => {
                 </div>
 
                 {/* Check if the related post has a video */}
+                <Link href={`/posts/${relatedPost.fields.slug}`}>
                 {relatedPost.fields.video && (
                   <div className='related-post-video'>
                     <ReactPlayer
@@ -144,6 +156,7 @@ const Post = ({ post, relatedPosts }) => {
                     />
                   </div>
                 )}
+                </Link>
               </li>
             ))}
           </ul>

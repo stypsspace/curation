@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import client from 'src/lib/contentful';
 import Image from 'next/image';
-import ReactPlayer from 'react-player';
+import dynamic from 'next/dynamic';
+
+const ReactPlayer = dynamic(() => import('react-player'), { ssr: false });
 
 const contentfulLoader = ({ src, width, quality }) => {
   const fileType = src.split('.').pop();
@@ -19,6 +21,10 @@ const ContentfulImage = (props) => {
 const Posts = ({ posts }) => {
   const [selectedCategory, setSelectedCategory] = useState('');
 
+  useEffect(() => {
+    setSelectedCategory('');
+  }, []);
+
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
   };
@@ -27,36 +33,22 @@ const Posts = ({ posts }) => {
     ? posts.filter((post) => post.fields.category === selectedCategory)
     : posts;
 
-    return (
-      <div className='filter-container-wrap'>
-        <ul className='filter-container'>
-          <li>
-            <button onClick={() => handleCategoryChange('')}>All</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('Portfolio')}>Portfolio</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('Personal')}>Personal</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('App')}>App</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('Commerce')}>Commerce</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('Technology')}>Technology</button>
-          </li>
-        </ul>
-        <ul className='category-container'>
-          {filteredPosts.map((post) => (
-            <Post key={post.fields.slug} post={post} />
-          ))}
-        </ul>
-      </div>
-    );
-  };
+  return (
+    <div className='filter-container-wrap'>
+      <ul className='filter-container'>
+        <li>
+          <button onClick={() => handleCategoryChange('')}>All</button>
+        </li>
+        {/* Add your category buttons here */}
+      </ul>
+      <ul className='category-container'>
+        {filteredPosts.map((post) => (
+          <Post key={post.fields.slug} post={post} />
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 const Post = ({ post }) => {
   const { title, slug, coverImage, video, date, author, externalUrl } = post.fields;
@@ -93,21 +85,24 @@ const Post = ({ post }) => {
           <div className='post-video'>
             <Link href={`/posts/${slug}`} aria-label={title}>
               <div className='video-wrapper'>
-                <video
+                <ReactPlayer
                   className='video-player'
-                  src={video.fields.file.url}
+                  url={video.fields.file.url} // Use the Contentful video URL
                   width={400}
                   height={300}
-                  autoPlay
+                  playing
                   loop
                   muted
-                  playsInline // Add playsInline attribute to prevent picture-in-picture on mobile
                   controls={false}
-                  preload='metadata' // Preload only the metadata for faster loading
-                  defer // Defer loading of the video until after the initial render
-                >
-                  Your browser does not support the video tag.
-                </video>
+                  playsInline // Use playsInline instead of playsinline
+                  config={{
+                    file: {
+                      attributes: {
+                        controlsList: 'nodownload', // Hide download option for the video
+                      },
+                    },
+                  }}
+                />
               </div>
             </Link>
           </div>
