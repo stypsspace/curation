@@ -29,7 +29,8 @@ width:100%;
 .styps-logo{  
 width:28px; 
 display:inline-block;
-margin-left:8px;    
+margin-left: -3px;
+margin-top: -4px;    
 }
 
 
@@ -62,13 +63,38 @@ align-items: center;
 width:100%;  
 }
 
-
+/* Menu links */
 .site-header-nav .site-header-nav-link-1,
 .site-header-nav .site-header-nav-link-2{
 position:relative;
 font-size:13px;
 cursor: pointer;
+
 }
+
+
+li span.site-header-nav-link-1,
+li span.site-header-nav-link-2{
+  position: relative;
+  cursor: pointer; 
+  background: transparent;
+  border-radius: 5px;
+  padding-top:5px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 5px;
+  font-size:13px;
+  display: block;
+  }
+
+li span.site-header-nav-link-1:hover,
+li span.site-header-nav-link-2:hover{
+  background: #333;
+  transition: 0.5s ease-in-out;
+-webkit-transition: 0.5s ease-in-out;
+-moz-transition: 0.5s ease-in-out;
+  }
+
 
 .wrap{
   position:relative;
@@ -392,10 +418,7 @@ padding-left: 10px;
 Footer
 ***********************************************************************/
 .site-footer{
-/*background: #f3f3f3;*/
-background: #070707;
 color:#222;
-
 height:50px;
 width:100%;
 text-align:center;

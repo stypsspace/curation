@@ -53,7 +53,7 @@ h3{
     }
  
     body{
-     background: #070707;
+     background: rgb(0, 0, 0, 0.95);
      color:#fefefe; 
     }
 
@@ -64,11 +64,6 @@ h3{
 
     body header ul li a{
       color:#fefefe; 
-    }
-
-
-    body footer{
-      background: #070707;
     }
 
 
