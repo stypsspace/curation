@@ -40,6 +40,7 @@ const Post = ({ post, relatedPosts }) => {
 
       <div className="site-description">
           <p>
+          {post.fields.title}
             </p>
             </div>
 
