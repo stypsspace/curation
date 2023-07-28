@@ -6,7 +6,8 @@ class MyDocument extends Document {
       <Html>
         <Head>
           {/* Add your favicon link here */}
-          <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+          <link rel="icon" href="/favicon_2.ico" type="image/x-icon" />
+          <title>Styps — Curated websites for inspiration and promotion of good design</title>
           {/* Other meta tags, stylesheets, or scripts can be added here */}
         </Head>
         <body>
