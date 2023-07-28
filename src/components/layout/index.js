@@ -6,27 +6,33 @@ const Layout = ({ children }) => {
     <div className="site-wrapper">
 
       <header className='site-header'>
+        
+       
+       
+           
+
         <nav className='site-header-nav-wrap'>
+        
           <ul className='site-header-nav'>
+
             <li>
-              <Link href='/' className='text-sm font-medium uppercase text-stone-400'>
-                Home
-              </Link>
+            <div className='styps-logo'>
+            <Link href='/' className='site-header-logo'>
+          <img src='logo.png' alt='Logo'/>
+          </Link>
+            </div>
             </li>
+            
             <li>
-              <Link href='/shop' className='text-sm font-medium uppercase text-stone-400'>
-                Shop
-              </Link>
+            <span className='site-header-nav-link-1'>
+                Index
+              </span>
             </li>
+            
             <li>
-              <Link href='/personal' className='text-sm font-medium uppercase text-stone-400'>
-                Personal
-              </Link>
-            </li>
-            <li>
-              <Link href='/portfolio' className='text-sm font-medium uppercase text-stone-400'>
-                Portfolio
-              </Link>
+              <span className='site-header-nav-link-2'>
+                Menu
+              </span>
             </li>
           </ul>
         </nav>
@@ -36,7 +42,7 @@ const Layout = ({ children }) => {
 
       <footer className='site-footer'>
         <div className='site-footer-content'>
-          <p>©Styps</p>
+          <p>©2023 Styps Ltd</p>
         </div>
       </footer>
 

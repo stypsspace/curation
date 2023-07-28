@@ -76,6 +76,11 @@ const Posts = ({ posts }) => {
         </ul>
       </div>
 
+      <div className="site-description">
+          <p>Curated websites for inspiration and promotion of good design
+            </p>
+            </div>
+
       <ul className='category-container'>
         {filteredPosts.map((post) => {
           const { title, slug, coverImage, video, date, author, externalUrl } = post.fields;
