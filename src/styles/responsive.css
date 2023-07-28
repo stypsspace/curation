@@ -1,6 +1,9 @@
 /********************************************************************
 Globals.
 *******************************************************************/
+/*******************************************************************
+Max-width:768px and min-width:0px
+********************************************************************/
 @media only screen and (max-width:768px) and (min-width:0px){
 .wrap{
 position:relative;
@@ -13,7 +16,7 @@ position:relative;
 Posts.
 *******************************************************************/
 /*******************************************************************
-Max-width:768px and min-width:280px
+Max-width:1024px and min-width:768px
 ********************************************************************/
 @media only screen and (max-width:1024px) and (min-width:768px){
 
@@ -27,13 +30,13 @@ width:100%;
 
 /* Content */
 ul.related-posts-content{
-    position:relative;  
-    display: grid;
-    grid-template-columns:repeat(2, 1fr);
-    grid-column-gap:7px;
-    width:100%;  
-    padding-top:50px;
-    }
+position:relative;  
+display: grid;
+grid-template-columns:repeat(2, 1fr);
+grid-column-gap:7px;
+width:100%;  
+padding-top:50px;
+}
 
 }
 
@@ -41,46 +44,40 @@ ul.related-posts-content{
 
 
 /*******************************************************************
-Max-width:768px and min-width:280px
+Max-width:768px and min-width:0px
 ********************************************************************/
 @media only screen and (max-width:768px) and (min-width:0px){
 
-    /* Categories grid */
-    .category-container{
-    display: grid;
-    grid-template-columns:repeat(1, 1fr);
-    grid-column-gap:7px;
-    width:100%;  
-    }
-    
-    /* Content */
-    ul.related-posts-content{
-        position:relative;  
-        display: grid;
-        grid-template-columns:repeat(1, 1fr);
-        grid-column-gap:7px;
-        width:100%;  
-        padding-top:50px;
-        }
-    
-    }
-
-
-
-
-
-
-/*******************************************************************
-Video: Max-width:768px
-*******************************************************************
-@media (max-width: 768px) {
-.video-player {
-pointer-events: none; 
-controls: none; 
+/* Header */
+.site-header{
+width:98.5%;
 }
 
-.video-wrapper {
-position: relative;
+
+
+/* Categories grid */
+.category-container{
+display: grid;
+grid-template-columns:repeat(1, 1fr);
+grid-column-gap:7px;
+width:100%;  
 }
-}*/
-  
+
+/* Content */
+ul.related-posts-content{
+position:relative;  
+display: grid;
+grid-template-columns:repeat(1, 1fr);
+grid-column-gap:7px;
+width:100%;  
+padding-top:50px;
+}
+
+}
+
+
+
+
+
+
+
