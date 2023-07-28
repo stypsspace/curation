@@ -38,6 +38,10 @@ const Post = ({ post, relatedPosts }) => {
     <div className='post-single-wrap'>
       <div className='fade-in'>
 
+      <div className="site-description">
+          <p>
+            </p>
+            </div>
 
         <div className='post-single-header'>
           <h3>{post.fields.title}</h3>
