@@ -39,7 +39,7 @@ const Post = ({ post, relatedPosts }) => {
       <div className='fade-in'>
         <div className='post-single-header'>
           <h3>{post.fields.title}</h3>
-          <span className='post-externalurl'>
+          <span className='post-single-externalurl'>
             {externalUrl && (
               <a href={externalUrl} target='_blank' rel='noopener noreferrer' className='mt-4 text-blue-500 underline'>
                 Open
