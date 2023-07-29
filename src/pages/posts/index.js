@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import client from 'src/lib/contentful';
 import Image from 'next/image';
+import Head from 'next/head';
+
 
 const contentfulLoader = ({ src, width, quality }) => {
   return `${src}?w=${width}&q=${quality || 75}`;
@@ -25,6 +27,11 @@ const Posts = ({ posts }) => {
 
   return (
     <div>
+
+      <Head>
+       <title>Styps — Curated websites for inspiration and promotion of good design</title>
+      </Head>
+
       <div className='filter-container-wrap'>
         <ul className='filter-container'>
           <li>

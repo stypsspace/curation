@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import client from 'src/lib/contentful';
 import Image from 'next/image';
+import Head from 'next/head'; 
 
 const contentfulLoader = ({ src, width, quality }) => {
   return `${src}?w=${width}&q=${quality || 75}`;
@@ -70,9 +71,31 @@ const Posts = ({ posts }) => {
 
   return (
     <div>
+
+     <Head>
+       <title>Styps — Curated websites for inspiration and promotion of good design</title>
+      </Head>
+
       <div className='filter-container-wrap'>
         <ul className='filter-container'>
-          {/* ... Filter buttons code ... */}
+          <li>
+            <button onClick={() => handleCategoryChange('')}>All</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('Portfolio')}>Portfolio</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('Personal')}>Personal</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('App')}>App</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('Commerce')}>Commerce</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('Technology')}>Technology</button>
+          </li>
         </ul>
       </div>
 

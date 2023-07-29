@@ -138,9 +138,12 @@ position: relative;
 }
 
 
+/*Post filter wrap */
+.filter-container-wrap{
+display:none;
+}
 
-
-/*Post filter */
+/*Post filter content */
 .filter-container{
 display: flex;
 justify-content: space-between;
