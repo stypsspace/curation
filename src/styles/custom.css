@@ -42,6 +42,7 @@ z-index:1;
 /* Branding */
 .styps-logo{  
 width:28px; 
+height:auto;
 display:inline-block;
 position: relative;  
 }
