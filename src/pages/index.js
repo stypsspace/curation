@@ -1,79 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import client from 'src/lib/contentful';
 import Image from 'next/image';
-import Head from 'next/head'; 
+import Head from 'next/head';
+
 
 const contentfulLoader = ({ src, width, quality }) => {
   return `${src}?w=${width}&q=${quality || 75}`;
 };
 
 const ContentfulImage = (props) => {
-  return <Image loader={contentfulLoader} {...props} />;
+  return <Image loader={contentfulLoader} alt={props.alt} {...props} />;
 };
+
 
 const Posts = ({ posts }) => {
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [videoThumbnails, setVideoThumbnails] = useState({});
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
   };
-
-  // Fetch video thumbnails from the serverless function
-  useEffect(() => {
-    const fetchThumbnails = async () => {
-      const videoThumbnails = {};
-      for (const post of posts) {
-        if (post.fields.video) {
-          try {
-            const response = await fetch('/api/generateThumbnail', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ videoUrl: post.fields.video.fields.file.url }),
-            });
-            const data = await response.json();
-            videoThumbnails[post.fields.slug] = data.thumbnail;
-          } catch (error) {
-            console.error('Error fetching video thumbnail:', error);
-          }
-        }
-      }
-      setVideoThumbnails(videoThumbnails);
-    };
-
-    fetchThumbnails();
-  }, [posts]);
 
   // Filter posts based on the selected category
   const filteredPosts = selectedCategory
     ? posts.filter((post) => post.fields.category === selectedCategory)
     : posts;
 
-  useEffect(() => {
-    const setVideoPosters = async () => {
-      const videoElements = document.querySelectorAll('.video-player');
-
-      for (const video of videoElements) {
-        try {
-          const thumbnail = await generateThumbnail(video.src, { width: 400, height: 300 });
-          video.poster = thumbnail;
-        } catch (error) {
-          console.error('Error generating video thumbnail:', error);
-        }
-      }
-    };
-
-    setVideoPosters();
-  }, []);
-
   return (
     <div>
-
-     <Head>
-       <title>Styps — Curated websites for inspiration and promotion of good design</title>
+      <Head>
+        <title>Styps — Curated websites for inspiration and promotion of good design</title>
       </Head>
 
       <div className='filter-container-wrap'>
@@ -99,10 +55,9 @@ const Posts = ({ posts }) => {
         </ul>
       </div>
 
-      <div className="site-description">
-          <p>Curated websites for inspiration and promotion of good design
-            </p>
-            </div>
+      <div className='site-description'>
+        <p>Curated websites for inspiration and promotion of good design</p>
+      </div>
 
       <ul className='category-container'>
         {filteredPosts.map((post) => {
@@ -148,8 +103,7 @@ const Posts = ({ posts }) => {
                         preload='metadata' // Preload only the metadata for faster loading
                         muted // Mute the video to prevent audio playback on page load
                         playsInline // Add playsInline attribute to prevent picture-in-picture on mobile
-                      >
-                      </video>
+                      ></video>
                     </div>
                   </Link>
                 </div>

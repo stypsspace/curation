@@ -10,8 +10,9 @@ const contentfulLoader = ({ src, width, quality }) => {
 };
 
 const ContentfulImage = (props) => {
-  return <Image loader={contentfulLoader} {...props} />;
+  return <Image loader={contentfulLoader} alt={props.alt} {...props} />;
 };
+
 
 const Posts = ({ posts }) => {
   const [selectedCategory, setSelectedCategory] = useState('');

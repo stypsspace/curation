@@ -3,10 +3,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import RichText from 'src/components/ui/RichText';
 import { createClient } from 'contentful';
+import { useRouter } from 'next/router';
+import { Redis } from '@upstash/redis';
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+});
+
+
+const redis = new Redis({
+  url: 'https://flowing-chipmunk-34813.upstash.io',
+  token: 'AYf9ACQgZDUwMDE2ZTEtYmY3YS00MGYzLTk3YWYtMjhkYWI0ZDg4MWE0N2JhOGE3ODFmNGY3NGNmNDljZTQ5MmExNTA4MzBlM2Q=',
 });
 
 function contentfulLoader({ src, width, quality }) {
@@ -21,28 +29,101 @@ const ContentfulImage = (props) => {
   return <Image loader={contentfulLoader} {...props} />;
 };
 
-const Post = ({ post, relatedPosts }) => {
-  const { content, name, externalUrl } = post.fields;
+const API_URL = 'pages/api/incr';
 
-  const [isClient, setIsClient] = useState(false);
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
 
-  if (!isClient) {
-    return null;
+
+const fetchViewCountFromRedis = async (slug) => {
+  try {
+    const viewCount = await redis.get(slug);
+    return viewCount ? parseInt(viewCount, 10) : 0;
+  } catch (error) {
+    console.error('Error fetching view count from Redis:', error);
+    return 0;
   }
+};
+
+
+
+const fetchViewCountFromAPI = async (slug) => {
+  try {
+    const response = await fetch('/api/incr', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ slug }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Error incrementing view count.');
+    }
+
+    const textData = await response.text();
+
+    // Check if the response is empty or not valid JSON
+    if (!textData) {
+      throw new Error('Empty or invalid response data from API.');
+    }
+
+    const data = JSON.parse(textData);
+
+    console.log('Parsed JSON data:', data);
+
+    if (data && typeof data.viewCount === 'number') {
+      return data.viewCount;
+    } else {
+      throw new Error('Invalid response data from API.');
+    }
+  } catch (error) {
+    console.error('Error fetching view count from API:', error);
+    return 0;
+  }
+};
+
+const fetchViewCount = async (slug) => {
+  const viewCountFromRedis = await fetchViewCountFromRedis(slug);
+  const viewCountFromAPI = await fetchViewCountFromAPI(slug);
+  return Math.max(viewCountFromRedis, viewCountFromAPI);
+};
+
+const Post = ({ post, relatedPosts }) => {
+  // Ensure the post prop is not undefined
+  if (!post) {
+    return <div>Loading...</div>;
+  }
+
+  const { content, name, externalUrl } = post.fields;
+  const router = useRouter();
+
+  // State to store the view count
+  const [viewCount, setViewCount] = useState(0);
+
+  // Function to fetch the view count for the post
+  const fetchViewCountForPost = async () => {
+    try {
+      console.log('Fetching view count...');
+      const slug = post.fields.slug;
+      const viewCount = await fetchViewCount(slug);
+      console.log('Received view count:', viewCount);
+      setViewCount(viewCount);
+    } catch (error) {
+      console.error('Error fetching view count:', error);
+    }
+  };
+
+  // Fetch the view count when the component mounts
+  useEffect(() => {
+    fetchViewCountForPost();
+  }, []);
 
   // Client-side rendering: Render the component once data is available
   return (
     <div className='post-single-wrap'>
       <div className='fade-in'>
-
-      <div className="site-description">
-          <p>
-          {post.fields.title}
-            </p>
-            </div>
+        <div className="site-description">
+          <p>{post.fields.title}</p>
+        </div>
 
         <div className='post-single-header'>
           <h3>{post.fields.title}</h3>
@@ -117,6 +198,11 @@ const Post = ({ post, relatedPosts }) => {
           <RichText content={content} />
         </div>
 
+        {/* Display the view count from Redis */}
+        <div className='view-count'>
+          Views from Redis: {viewCount}
+        </div>
+
         {/* Display related posts */}
         <div className='related-posts-wrap'>
           <h3 className='related-posts-title'>Related Posts</h3>
@@ -176,7 +262,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: true, // Set to true to enable fallback for unfetched pages
   };
 };
 
