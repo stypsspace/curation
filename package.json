@@ -24,6 +24,9 @@
     "video-thumbnail": "^1.2.0"
   },
   "devDependencies": {
-    "jscodeshift": "^0.15.0"
+    "@types/node": "^20.4.5",
+    "@types/react": "^18.2.17",
+    "jscodeshift": "^0.15.0",
+    "typescript": "^5.1.6"
   }
 }
