@@ -8,6 +8,8 @@ class MyDocument extends Document {
           {/* Add your favicon link here */}
           <link rel="icon" href="/favicon_2.ico" type="image/x-icon" />
           {/* Other meta tags, stylesheets, or scripts can be added here */}
+          <script defer data-domain="styps.space" src="https://plausible.io/js/script.js"></script>
+
         </Head>
         <body>
           <Main />
