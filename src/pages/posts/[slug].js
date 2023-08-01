@@ -163,6 +163,7 @@ const Post = ({ post, relatedPosts }) => {
           </ul>
         </div>
       </div>
+
     </div>
   );
 };
