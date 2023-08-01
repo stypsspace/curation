@@ -5,9 +5,18 @@ export default async (req, res) => {
   const slug = req.query.slug;
 
   try {
+    const auth = new google.auth.GoogleAuth({
+      credentials: {
+        client_email: process.env.GOOGLE_CLIENT_EMAIL,
+        client_id: process.env.GOOGLE_CLIENT_ID,
+        private_key: process.env.GOOGLE_PRIVATE_KEY,
+      },
+      scopes: ['https://www.googleapis.com/auth/analytics.readonly'],
+    });
+
     const analytics = google.analytics({
       auth,
-      version: 'v4',
+      version: 'v4', // Use version 'v4' instead of 'v3'
     });
 
     const response = await analytics.data.ga.get({
@@ -27,4 +36,4 @@ export default async (req, res) => {
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
-}
+};
