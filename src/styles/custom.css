@@ -43,8 +43,14 @@ z-index:1;
 .styps-logo{  
 width:28px; 
 height:auto;
-display:inline-block;
-position: relative;  
+position: relative; 
+display:block 
+}
+
+.styps-logo img{
+  width:100%;
+  height: auto;
+  display:block
 }
 
 

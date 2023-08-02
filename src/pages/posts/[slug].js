@@ -34,10 +34,27 @@ const Post = ({ post, relatedPosts }) => {
     setIsClient(true);
   }, []);
 
-  const [pageViews, setPageViews] = useState(0); // Initialize with loading message
+  // Increment page view count in Redis when the component mounts
+  useEffect(() => {
+    const redis = new Redis({
+      url: 'https://sound-phoenix-37251.upstash.io',
+      token: 'AZGDACQgMjYyZWZmNTQtNGE1OS00Nzg2LWE5ODItNjVkMmVkZWUwZGRiZWE5NmNiYjkzMThhNDQzZGIxMmU5MzE1ZWFmMWEzNzk=',
+    });
+  
+    redis.incr(`pageviews:${post.fields.slug}`); // Increment page view count
+  
+    // No need to return a cleanup function here
+  
+  }, [post.fields.slug]);
+
+  
+  // Use a placeholder value for pageViews, since you're now tracking page views in Redis
+  const [pageViews, setPageViews] = useState(0); // Initialize with 'Loading...'
 
   useEffect(() => {
     if (isClient) {
+
+
       const fetchPageViews = async () => {
         try {
           const response = await fetch('https://sound-phoenix-37251.upstash.io/get', {
@@ -46,12 +63,18 @@ const Post = ({ post, relatedPosts }) => {
               'Authorization': 'Bearer AZGDACQgMjYyZWZmNTQtNGE1OS00Nzg2LWE5ODItNjVkMmVkZWUwZGRiZWE5NmNiYjkzMThhNDQzZGIxMmU5MzE1ZWFmMWEzNzk=',
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ slug: post.fields.slug }),
+            body: JSON.stringify({ slug: post.fields.slug }), // Use 'slug' instead of 'key'
           });
-
+      
+          console.log('Fetch Response:', response); // Log the entire response object
+      
           const data = await response.json();
+          console.log('Fetched data:', data);
+          console.log('Fetched result:', data.result);
+          
           if (data && data.result !== undefined) {
             setPageViews(data.result);
+            console.log('Fetched pageViews:', data.result);
           } else {
             console.error('Invalid response format:', data);
           }
@@ -59,10 +82,10 @@ const Post = ({ post, relatedPosts }) => {
           console.error('Error fetching page views:', error);
         }
       };
-
+     
+  
       fetchPageViews();
     }
-    
   }, [isClient, post.fields.slug]);
 
 
