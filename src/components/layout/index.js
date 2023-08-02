@@ -18,7 +18,11 @@ return (
 <li>
 <div className='styps-logo'>
 <Link href='/' className='site-header-logo'>
-<img src='logo.png' alt='Logo'/>
+<img src='logo.png' 
+alt='Logo'
+width={28}
+loading='lazy'
+/>
 </Link>
 </div>
 </li>

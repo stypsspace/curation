@@ -5,6 +5,7 @@ import RichText from 'src/components/ui/RichText';
 import { createClient } from 'contentful';
 import { Redis } from '@upstash/redis';
 
+
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
   accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
@@ -22,38 +23,47 @@ const ContentfulImage = (props) => {
   return <Image loader={contentfulLoader} alt={props.alt} {...props} />;
 };
 
+
+
+
 const Post = ({ post, relatedPosts }) => {
   const { content, name, externalUrl } = post.fields;
 
   const [isClient, setIsClient] = useState(false);
-  const [pageViews, setPageViews] = useState(0); // Initialize with 0 page views
-
   useEffect(() => {
     setIsClient(true);
+  }, []);
 
-    const fetchPageViews = async () => {
-      try {
-        const redis = new Redis({
-          url: 'https://sound-phoenix-37251.upstash.io', // Replace with your Upstash Redis connection URL
-          token: 'AZGDACQgMjYyZWZmNTQtNGE1OS00Nzg2LWE5ODItNjVkMmVkZWUwZGRiZWE5NmNiYjkzMThhNDQzZGIxMmU5MzE1ZWFmMWEzNzk=' // Replace with your Upstash Redis token
-        });
+  const [pageViews, setPageViews] = useState(0); // Initialize with loading message
 
-        const key = `pageviews:${post.fields.slug}`;
-        const fetchedValue = await redis.get(key);
-        console.log('Fetched page views:', fetchedValue);
+  useEffect(() => {
+    if (isClient) {
+      const fetchPageViews = async () => {
+        try {
+          const response = await fetch('https://sound-phoenix-37251.upstash.io/get', {
+            method: 'POST',
+            headers: {
+              'Authorization': 'Bearer AZGDACQgMjYyZWZmNTQtNGE1OS00Nzg2LWE5ODItNjVkMmVkZWUwZGRiZWE5NmNiYjkzMThhNDQzZGIxMmU5MzE1ZWFmMWEzNzk=',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ slug: post.fields.slug }),
+          });
 
-        setPageViews(parseInt(fetchedValue) || 0);
-      } catch (error) {
-        console.error('Error fetching page views:', error);
-      }
-    };
+          const data = await response.json();
+          if (data && data.result !== undefined) {
+            setPageViews(data.result);
+          } else {
+            console.error('Invalid response format:', data);
+          }
+        } catch (error) {
+          console.error('Error fetching page views:', error);
+        }
+      };
 
-    fetchPageViews();
-  }, [post.fields.slug]);
-
-  if (!isClient) {
-    return null;
-  }
+      fetchPageViews();
+    }
+    
+  }, [isClient, post.fields.slug]);
 
 
   // Client-side rendering: Render the component once data is available
@@ -141,7 +151,7 @@ const Post = ({ post, relatedPosts }) => {
         </div>
 
          {/* Display the page view count here */}
-      <div className='post-view-count'>Page Views: {pageViews}</div>
+         <div className='post-view-count'>Page Views: {pageViews}</div>
 
         {/* Display related posts */}
         <div className='related-posts-wrap'>
