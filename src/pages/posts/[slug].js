@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import RichText from 'src/components/ui/RichText';
 import { createClient } from 'contentful';
-import { Redis } from '@upstash/redis'; // Import the Redis library
+import { Redis } from '@upstash/redis';
 
 const client = createClient({
   space: process.env.CONTENTFUL_SPACE_ID,
@@ -22,45 +22,38 @@ const ContentfulImage = (props) => {
   return <Image loader={contentfulLoader} alt={props.alt} {...props} />;
 };
 
-
-
-
-
 const Post = ({ post, relatedPosts }) => {
   const { content, name, externalUrl } = post.fields;
 
   const [isClient, setIsClient] = useState(false);
+  const [pageViews, setPageViews] = useState(0); // Initialize with 0 page views
+
   useEffect(() => {
     setIsClient(true);
-  }, []);
 
-  const [pageViews, setPageViews] = useState(0); // Initialize pageViews state variable
+    const fetchPageViews = async () => {
+      try {
+        const redis = new Redis({
+          url: 'https://sound-phoenix-37251.upstash.io', // Replace with your Upstash Redis connection URL
+          token: 'AZGDACQgMjYyZWZmNTQtNGE1OS00Nzg2LWE5ODItNjVkMmVkZWUwZGRiZWE5NmNiYjkzMThhNDQzZGIxMmU5MzE1ZWFmMWEzNzk=' // Replace with your Upstash Redis token
+        });
 
-  useEffect(() => {
-    axios.get(`/api/views/${post.fields.slug}`).then((response) => {
-      setPageViews(response.data.views);
-    });
+        const key = `pageviews:${post.fields.slug}`;
+        const fetchedValue = await redis.get(key);
+        console.log('Fetched page views:', fetchedValue);
+
+        setPageViews(parseInt(fetchedValue) || 0);
+      } catch (error) {
+        console.error('Error fetching page views:', error);
+      }
+    };
+
+    fetchPageViews();
   }, [post.fields.slug]);
 
   if (!isClient) {
     return null;
   }
-
-  // Increment page view count in Redis when the component mounts
-  useEffect(() => {
-    const redis = new Redis({
-    url: 'https://sound-phoenix-37251.upstash.io', // Replace with your Upstash Redis connection URL
-    token: 'AZGDACQgMjYyZWZmNTQtNGE1OS00Nzg2LWE5ODItNjVkMmVkZWUwZGRiZWE5NmNiYjkzMThhNDQzZGIxMmU5MzE1ZWFmMWEzNzk=' // Replace with your Upstash Redis token
-    });
-
-    redis.incr(`pageviews:${post.fields.slug}`); // Increment page view count
-
-    return () => {
-      redis.quit(); // Close the Redis connection when the component unmounts
-    };
-  }, [post.fields.slug]);
-
-
 
 
   // Client-side rendering: Render the component once data is available
