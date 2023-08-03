@@ -4,6 +4,8 @@ import Link from 'next/link';
 import RichText from 'src/components/ui/RichText';
 import { createClient } from 'contentful';
 import { Redis } from '@upstash/redis';
+import { ReportView } from "./view";
+
 
 
 const client = createClient({
@@ -29,64 +31,34 @@ const ContentfulImage = (props) => {
 const Post = ({ post, relatedPosts }) => {
   const { content, name, externalUrl } = post.fields;
 
-  const [isClient, setIsClient] = useState(false);
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  // Increment page view count in Redis when the component mounts
-  useEffect(() => {
-    const redis = new Redis({
-      url: 'https://sound-phoenix-37251.upstash.io',
-      token: 'AZGDACQgMjYyZWZmNTQtNGE1OS00Nzg2LWE5ODItNjVkMmVkZWUwZGRiZWE5NmNiYjkzMThhNDQzZGIxMmU5MzE1ZWFmMWEzNzk=',
-    });
-  
-    redis.incr(`pageviews:${post.fields.slug}`); // Increment page view count
-  
-    // No need to return a cleanup function here
-  
-  }, [post.fields.slug]);
-
-  
-  // Use a placeholder value for pageViews, since you're now tracking page views in Redis
-  const [pageViews, setPageViews] = useState(0); // Initialize with 'Loading...'
+  const [pageViews, setPageViews] = useState(0);
 
   useEffect(() => {
-    if (isClient) {
+    const fetchPageViews = async () => {
+      try {
+        const response = await fetch('pages/api/incr', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ slug: post.fields.slug }),
+        });
 
-
-      const fetchPageViews = async () => {
-        try {
-          const response = await fetch('https://sound-phoenix-37251.upstash.io/get', {
-            method: 'POST',
-            headers: {
-              'Authorization': 'Bearer AZGDACQgMjYyZWZmNTQtNGE1OS00Nzg2LWE5ODItNjVkMmVkZWUwZGRiZWE5NmNiYjkzMThhNDQzZGIxMmU5MzE1ZWFmMWEzNzk=',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ slug: post.fields.slug }), // Use 'slug' instead of 'key'
-          });
-      
-          console.log('Fetch Response:', response); // Log the entire response object
-      
-          const data = await response.json();
-          console.log('Fetched data:', data);
-          console.log('Fetched result:', data.result);
-          
-          if (data && data.result !== undefined) {
-            setPageViews(data.result);
-            console.log('Fetched pageViews:', data.result);
-          } else {
-            console.error('Invalid response format:', data);
-          }
-        } catch (error) {
-          console.error('Error fetching page views:', error);
+        if (response.status === 202) {
+          // View was not incremented (duplicate view)
+          console.log('Page view was not incremented.');
+          return;
         }
-      };
-     
-  
-      fetchPageViews();
-    }
-  }, [isClient, post.fields.slug]);
+
+        // Increment the local pageViews state
+        setPageViews((prevPageViews) => prevPageViews + 1);
+      } catch (error) {
+        console.error('Error fetching page views:', error);
+      }
+    };
+
+    fetchPageViews();
+  }, [post.fields.slug]);
 
 
   // Client-side rendering: Render the component once data is available
@@ -173,8 +145,8 @@ const Post = ({ post, relatedPosts }) => {
           <RichText content={content} />
         </div>
 
-         {/* Display the page view count here */}
-         <div className='post-view-count'>Page Views: {pageViews}</div>
+         {/* Display the updated page view count */}
+      <p>Page Views: {pageViews}</p>
 
         {/* Display related posts */}
         <div className='related-posts-wrap'>
