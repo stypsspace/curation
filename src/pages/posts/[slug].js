@@ -245,7 +245,7 @@ export const getStaticProps = async ({ params }) => {
       token: 'AZQJACQgODYyNGJmODAtODVmZi00Y2YyLThlNTUtNWZmZDAyZDdmMGZlNjA1ZTViYzYzNWQzNDBmM2I4MzNjODMyODliYjMzZDY=',
     });
 
-    const views = await redis.get<number>(["pageviews", "projects", params.slug].join(":"));
+    const views = await redis.get(["pageviews", "projects", post.fields.slug].join(":"));
     const initialPageViews = views ?? 0;
 
     return {

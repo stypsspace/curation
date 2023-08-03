@@ -16,8 +16,7 @@
     "noEmit": true,
     "incremental": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "typeRoots": ["./types", "./node_modules/@types"] // Move this line here
+    "isolatedModules": true
   },
   "include": [
     "next-env.d.ts",
