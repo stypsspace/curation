@@ -4,7 +4,7 @@ import Link from 'next/link';
 import RichText from 'src/components/ui/RichText';
 import { createClient } from 'contentful';
 import { Redis } from '@upstash/redis';
-import { ReportView } from "./view";
+import { ReportView } from "src/pages/posts/view";
 
 
 
@@ -27,36 +27,54 @@ const ContentfulImage = (props) => {
 
 
 
+const redis = new Redis({
+  url: 'https://suitable-bull-37897.upstash.io',
+  token: 'AZQJACQgODYyNGJmODAtODVmZi00Y2YyLThlNTUtNWZmZDAyZDdmMGZlNjA1ZTViYzYzNWQzNDBmM2I4MzNjODMyODliYjMzZDY=',
+})
+   
+const data = await redis.set('foo', 'bar');
 
-const Post = ({ post, relatedPosts }) => {
+const Post = ({ post, relatedPosts, initialPageViews }) => {
   const { content, name, externalUrl } = post.fields;
 
-  const [pageViews, setPageViews] = useState(0);
+  // Define the pageViews state variable
+  const [pageViews, setPageViews] = useState(initialPageViews);
 
   useEffect(() => {
+    console.log('useEffect is running');
+  
     const fetchPageViews = async () => {
       try {
-        const response = await fetch('pages/api/incr', {
+        const response = await fetch('/api/incr', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ slug: post.fields.slug }),
         });
-
+  
+        console.log('API Response:', response);
+  
         if (response.status === 202) {
           // View was not incremented (duplicate view)
           console.log('Page view was not incremented.');
           return;
         }
-
-        // Increment the local pageViews state
-        setPageViews((prevPageViews) => prevPageViews + 1);
+  
+        if (response.ok) {
+          // Fetch page views count from Redis
+          const data = await response.json();
+          const views = data.pageViews; // Assuming the API response structure has a field called 'pageViews'
+          setPageViews(views ?? 0);
+          console.log('Page Views:', views);
+        } else {
+          console.log('API Request failed:', response.status, response.statusText);
+        }
       } catch (error) {
         console.error('Error fetching page views:', error);
       }
     };
-
+  
     fetchPageViews();
   }, [post.fields.slug]);
 
@@ -146,7 +164,8 @@ const Post = ({ post, relatedPosts }) => {
         </div>
 
          {/* Display the updated page view count */}
-      <p>Page Views: {pageViews}</p>
+         <ReportView slug={post.fields.slug} />
+         <p>{pageViews} views</p>
 
         {/* Display related posts */}
         <div className='related-posts-wrap'>
@@ -236,17 +255,38 @@ export const getStaticProps = async ({ params }) => {
   // Limit the number of related posts to 5
   const limitedRelatedPosts = filteredRelatedPosts.slice(0, 5);
 
-  return {
-    props: {
-      post: {
-        fields: {
-          ...post.fields,
-          externalUrl: post.fields.externalUrl || '',
+  try {
+    const views = await redis.get<number>(["pageviews", "projects", params.slug].join(":"));
+    const initialPageViews = views ?? 0;
+  
+    return {
+      props: {
+        post: {
+          fields: {
+            ...post.fields,
+            externalUrl: post.fields.externalUrl || '',
+          },
         },
+        relatedPosts: limitedRelatedPosts,
+        initialPageViews, // Pass the initial page views count as a prop
       },
-      relatedPosts: limitedRelatedPosts,
-    },
-  };
+    };
+  } catch (error) {
+    console.error('Error fetching initial page views:', error);
+  
+    return {
+      props: {
+        post: {
+          fields: {
+            ...post.fields,
+            externalUrl: post.fields.externalUrl || '',
+          },
+        },
+        relatedPosts: limitedRelatedPosts,
+        initialPageViews: 0, // Provide a default value in case of error
+      },
+    };
+  }
 };
 
 export default Post;

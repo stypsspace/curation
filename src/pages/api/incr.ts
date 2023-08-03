@@ -7,6 +7,8 @@ export const config = {
 };
 
 export default async function incr(req: NextRequest): Promise<NextResponse> {
+	console.log('API Request Data:', req.body);
+	
 	if (req.method !== "POST") {
 		return new NextResponse("use POST", { status: 405 });
 	}
@@ -38,10 +40,19 @@ export default async function incr(req: NextRequest): Promise<NextResponse> {
 			nx: true,
 			ex: 24 * 60 * 60,
 		});
+
+
+		console.log('isNew:', isNew); // Add this line
+console.log('deduplication key:', ["deduplicate", hash, slug].join(":")); // Add this line
+
+
+
 		if (!isNew) {
-			new NextResponse(null, { status: 202 });
+			console.log('Page view was not incremented.');
+			return new NextResponse(null, { status: 202 });
 		}
 	}
-	await redis.incr(["pageviews", "projects", slug].join(":"));
-	return new NextResponse(null, { status: 202 });
+		await redis.incr(["pageviews", "projects", slug].join(":"));
+		console.log('Page view incremented successfully'); // Log a success message
+		return new NextResponse(null, { status: 202 });
 }
