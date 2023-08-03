@@ -41,25 +41,25 @@ const Post = ({ post, relatedPosts, initialPageViews }) => {
 
   useEffect(() => {
     console.log('useEffect is running');
-
+  
     const fetchPageViews = async () => {
       try {
-        // Fetch page views count from Redis
-        const redis = new Redis({
-          url: 'https://suitable-bull-37897.upstash.io', // Replace with your Redis URL
-          token: 'AZQJACQgODYyNGJmODAtODVmZi00Y2YyLThlNTUtNWZmZDAyZDdmMGZlNjA1ZTViYzYzNWQzNDBmM2I4MzNjODMyODliYjMzZDY=', // Replace with your Redis token
+        // Initialize a new Redis client for this specific fetch
+        const redisClient = new Redis({
+          url: 'https://suitable-bull-37897.upstash.io',
+          token: 'AZQJACQgODYyNGJmODAtODVmZi00Y2YyLThlNTUtNWZmZDAyZDdmMGZlNjA1ZTViYzYzNWQzNDBmM2I4MzNjODMyODliYjMzZDY=',
         });
-
-        const views = await redis.get(["pageviews", "projects", post.fields.slug].join(":"));
+  
+        const views = await redisClient.get(["pageviews", "projects", post.fields.slug].join(":"));
         setPageViews(views ?? 0);
-
+  
         // Close the Redis connection
-        await redis.quit();
+        await redisClient.quit();
       } catch (error) {
         console.error('Error fetching page views from Redis:', error);
       }
     };
-
+  
     fetchPageViews();
   }, [post.fields.slug]);
 
