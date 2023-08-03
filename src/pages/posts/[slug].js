@@ -4,7 +4,6 @@ import Link from 'next/link';
 import RichText from 'src/components/ui/RichText';
 import { createClient } from 'contentful';
 import { Redis } from '@upstash/redis';
-import { ReportView } from "src/pages/posts/view";
 
 
 
@@ -42,39 +41,25 @@ const Post = ({ post, relatedPosts, initialPageViews }) => {
 
   useEffect(() => {
     console.log('useEffect is running');
-  
+
     const fetchPageViews = async () => {
       try {
-        const response = await fetch('/api/incr', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ slug: post.fields.slug }),
+        // Fetch page views count from Redis
+        const redis = new Redis({
+          url: 'https://suitable-bull-37897.upstash.io', // Replace with your Redis URL
+          token: 'AZQJACQgODYyNGJmODAtODVmZi00Y2YyLThlNTUtNWZmZDAyZDdmMGZlNjA1ZTViYzYzNWQzNDBmM2I4MzNjODMyODliYjMzZDY=', // Replace with your Redis token
         });
-  
-        console.log('API Response:', response);
-  
-        if (response.status === 202) {
-          // View was not incremented (duplicate view)
-          console.log('Page view was not incremented.');
-          return;
-        }
-  
-        if (response.ok) {
-          // Fetch page views count from Redis
-          const data = await response.json();
-          const views = data.pageViews; // Assuming the API response structure has a field called 'pageViews'
-          setPageViews(views ?? 0);
-          console.log('Page Views:', views);
-        } else {
-          console.log('API Request failed:', response.status, response.statusText);
-        }
+
+        const views = await redis.get(["pageviews", "projects", post.fields.slug].join(":"));
+        setPageViews(views ?? 0);
+
+        // Close the Redis connection
+        await redis.quit();
       } catch (error) {
-        console.error('Error fetching page views:', error);
+        console.error('Error fetching page views from Redis:', error);
       }
     };
-  
+
     fetchPageViews();
   }, [post.fields.slug]);
 
@@ -164,7 +149,6 @@ const Post = ({ post, relatedPosts, initialPageViews }) => {
         </div>
 
          {/* Display the updated page view count */}
-         <ReportView slug={post.fields.slug} />
          <p>{pageViews} views</p>
 
         {/* Display related posts */}
@@ -256,9 +240,14 @@ export const getStaticProps = async ({ params }) => {
   const limitedRelatedPosts = filteredRelatedPosts.slice(0, 5);
 
   try {
+    const redis = new Redis({
+      url: 'https://suitable-bull-37897.upstash.io',
+      token: 'AZQJACQgODYyNGJmODAtODVmZi00Y2YyLThlNTUtNWZmZDAyZDdmMGZlNjA1ZTViYzYzNWQzNDBmM2I4MzNjODMyODliYjMzZDY=',
+    });
+
     const views = await redis.get<number>(["pageviews", "projects", params.slug].join(":"));
     const initialPageViews = views ?? 0;
-  
+
     return {
       props: {
         post: {
@@ -268,12 +257,12 @@ export const getStaticProps = async ({ params }) => {
           },
         },
         relatedPosts: limitedRelatedPosts,
-        initialPageViews, // Pass the initial page views count as a prop
+        initialPageViews,
       },
     };
   } catch (error) {
     console.error('Error fetching initial page views:', error);
-  
+
     return {
       props: {
         post: {
@@ -283,7 +272,7 @@ export const getStaticProps = async ({ params }) => {
           },
         },
         relatedPosts: limitedRelatedPosts,
-        initialPageViews: 0, // Provide a default value in case of error
+        initialPageViews: 0,
       },
     };
   }
