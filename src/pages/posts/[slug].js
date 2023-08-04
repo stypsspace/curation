@@ -31,7 +31,7 @@ const redis = new Redis({
   token: 'AZQJACQgODYyNGJmODAtODVmZi00Y2YyLThlNTUtNWZmZDAyZDdmMGZlNjA1ZTViYzYzNWQzNDBmM2I4MzNjODMyODliYjMzZDY=',
 })
    
-const data = await redis.set('foo', 'bar');
+const data = await redis.set('foo', 'bus');
 
 const Post = ({ post, relatedPosts, initialPageViews }) => {
   const { content, name, externalUrl } = post.fields;
@@ -44,17 +44,16 @@ const Post = ({ post, relatedPosts, initialPageViews }) => {
   
     const fetchPageViews = async () => {
       try {
-        // Initialize a new Redis client for this specific fetch
-        const redisClient = new Redis({
-          url: 'https://suitable-bull-37897.upstash.io',
-          token: 'AZQJACQgODYyNGJmODAtODVmZi00Y2YyLThlNTUtNWZmZDAyZDdmMGZlNjA1ZTViYzYzNWQzNDBmM2I4MzNjODMyODliYjMzZDY=',
+        const redis = new Redis({
+          url: 'https://suitable-bull-37897.upstash.io', // Replace with your Redis URL
+          token: 'AZQJACQgODYyNGJmODAtODVmZi00Y2YyLThlNTUtNWZmZDAyZDdmMGZlNjA1ZTViYzYzNWQzNDBmM2I4MzNjODMyODliYjMzZDY=', // Replace with your Redis token
         });
-  
-        const views = await redisClient.get(["pageviews", "projects", post.fields.slug].join(":"));
+    
+        const views = await redis.get(["pageviews", "projects", post.fields.slug].join(":"));
         setPageViews(views ?? 0);
-  
+    
         // Close the Redis connection
-        await redisClient.quit();
+        await redis.quit(); // Make sure to close the connection here
       } catch (error) {
         console.error('Error fetching page views from Redis:', error);
       }

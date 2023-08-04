@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-const ReportView: React.FC<{ slug: string }> = ({ slug }) => {
+export const ReportView: React.FC<{ slug: string }> = ({ slug }) => {
   useEffect(() => {
-    fetch("/api/incr", {
-      method: "POST",
+    fetch('/api/incr', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ slug }),
     });
@@ -13,5 +13,3 @@ const ReportView: React.FC<{ slug: string }> = ({ slug }) => {
 
   return null;
 };
-
-export default ReportView;
