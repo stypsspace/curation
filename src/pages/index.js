@@ -26,6 +26,8 @@ const Posts = ({ posts }) => {
     ? posts.filter((post) => post.fields.category === selectedCategory)
     : posts;
 
+
+
   return (
     <div>
       <Head>
@@ -59,11 +61,16 @@ const Posts = ({ posts }) => {
         <p>Curated websites for inspiration and promotion of good design</p>
       </div>
 
+      <div>
+        {/* Display the page view count for the index page */}
+        
+      </div>
+
       <ul className='category-container'>
         {filteredPosts.map((post) => {
           const { title, slug, coverImage, video, date, author, externalUrl } = post.fields;
           return (
-            <li className='fade-in' key={slug}>
+            <li className='' key={slug}>
               <div className='post-header'>
                 <h3>{title}</h3>
                 <span className='post-externalurl'>

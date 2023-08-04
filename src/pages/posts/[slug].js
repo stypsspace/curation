@@ -26,47 +26,35 @@ const ContentfulImage = (props) => {
 
 
 
-const redis = new Redis({
-  url: 'https://suitable-bull-37897.upstash.io',
-  token: 'AZQJACQgODYyNGJmODAtODVmZi00Y2YyLThlNTUtNWZmZDAyZDdmMGZlNjA1ZTViYzYzNWQzNDBmM2I4MzNjODMyODliYjMzZDY=',
-})
-   
-const data = await redis.set('foo', 'bus');
-
 const Post = ({ post, relatedPosts, initialPageViews }) => {
   const { content, name, externalUrl } = post.fields;
+  const slug = post.fields.slug;
 
   // Define the pageViews state variable
   const [pageViews, setPageViews] = useState(initialPageViews);
 
   useEffect(() => {
-    console.log('useEffect is running');
-  
+    // Fetch page views from your server-side API
     const fetchPageViews = async () => {
       try {
-        const redis = new Redis({
-          url: 'https://suitable-bull-37897.upstash.io', // Replace with your Redis URL
-          token: 'AZQJACQgODYyNGJmODAtODVmZi00Y2YyLThlNTUtNWZmZDAyZDdmMGZlNjA1ZTViYzYzNWQzNDBmM2I4MzNjODMyODliYjMzZDY=', // Replace with your Redis token
+        const response = await fetch(`/api/views/${slug}`, {
+          method: 'PATCH', // Assuming this triggers an increment in the API
         });
-    
-        const views = await redis.get(["pageviews", "projects", post.fields.slug].join(":"));
-        setPageViews(views ?? 0);
-    
-        // Close the Redis connection
-        await redis.quit(); // Make sure to close the connection here
+        const data = await response.json();
+        setPageViews(data.views);
       } catch (error) {
-        console.error('Error fetching page views from Redis:', error);
+        console.error('Error fetching page views:', error);
       }
     };
-  
+
     fetchPageViews();
-  }, [post.fields.slug]);
+  }, [slug]);
 
 
   // Client-side rendering: Render the component once data is available
   return (
     <div className='post-single-wrap'>
-      <div className='fade-in'>
+      <div className=''>
 
       <div className="site-description">
           <p>
@@ -214,6 +202,9 @@ export const getStaticPaths = async () => {
   };
 };
 
+
+
+
 export const getStaticProps = async ({ params }) => {
   const response = await client.getEntries({
     content_type: 'post',
@@ -240,12 +231,12 @@ export const getStaticProps = async ({ params }) => {
 
   try {
     const redis = new Redis({
-      url: 'https://suitable-bull-37897.upstash.io',
-      token: 'AZQJACQgODYyNGJmODAtODVmZi00Y2YyLThlNTUtNWZmZDAyZDdmMGZlNjA1ZTViYzYzNWQzNDBmM2I4MzNjODMyODliYjMzZDY=',
+      url: 'https://smashing-ram-39118.upstash.io',
+      token: 'AZjOACQgNmVjNGJmMTYtZTNkZC00YjcyLWE4ZDUtZjQ4NGVkMzI4ZTA0OTYyOWEyMGZlMDNjNDM3YWIwZGRlNzNlNDM0ODczYjY=',
     });
 
     const views = await redis.get(["pageviews", "projects", post.fields.slug].join(":"));
-    const initialPageViews = views ?? 0;
+    const initialPageViews = views || 0;
 
     return {
       props: {

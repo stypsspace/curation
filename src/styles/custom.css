@@ -135,7 +135,10 @@ Index.js
   padding-right:10px;
   }
 
-
+p.blog-pageview{
+position:relative;
+margin-top:-250px;
+}
 
 
 /* Wrap */
