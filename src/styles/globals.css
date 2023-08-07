@@ -53,7 +53,7 @@ h3{
     }
  
     body{
-     background: rgb(0, 0, 0, 0.95);
+     background-color: rgb(0, 0, 0, 0.95);
      color:#fefefe; 
     }
 
@@ -72,6 +72,9 @@ h3{
     }
 
 
+    .klaviyo-form button{
+      display:none !important;
+    }
     
 /*************************************************************************
 Globals
