@@ -76,6 +76,11 @@ h3{
       width: 300px !important;
     }
 
+
+    .klaviyo-form input{
+    text-align: center!important;  
+    }
+
     .klaviyo-form button{
       display:none !important;
     }
