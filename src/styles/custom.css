@@ -451,9 +451,14 @@ letter-spacing: -.3px;;
 
 .site-footer-content{
 position: relative;
-/*margin-top: 175px;*/
 padding-top:20px;
+display: flex;
+justify-content: space-between;
+align-items: center;
 }
+
+
+
 
 .site-footer-content p{
 position: relative; 
