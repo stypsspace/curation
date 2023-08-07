@@ -72,9 +72,19 @@ h3{
     }
 
 
+    .klaviyo-form{
+      width: 300px !important;
+    }
+
     .klaviyo-form button{
       display:none !important;
     }
+
+
+    .klaviyo-form .kl-private-reset-css-Xuajs1{
+      display:none !important; 
+    }
+    
     
 /*************************************************************************
 Globals
