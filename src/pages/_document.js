@@ -11,6 +11,7 @@ return (
 {/* Klaviyo */}
 <script
 type="text/javascript"
+async
 src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=U6mWb3"
 ></script>
 
