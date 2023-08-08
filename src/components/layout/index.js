@@ -1,10 +1,14 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Layout = ({ children }) => {
-return (
+const [klaviyoFormLoaded, setKlaviyoFormLoaded] = useState(false);
 
- 
+useEffect(() => {
+setKlaviyoFormLoaded(true);
+}, []);
+
+return (
 
 <div className="site-wrapper">
 
@@ -18,7 +22,7 @@ return (
 <li>
 <div className='styps-logo'>
 <Link href="/" className="site-header-logo">
-  <img src="/logo.png" alt="Logo" width={400} height={400} />
+<img src="/logo.png" alt="Logo" width={400} height={400} />
 </Link>
 </div>
 </li>
@@ -42,30 +46,17 @@ Menu
 
 <footer className='site-footer'>
 <div className='site-footer-content'>
-
-<div>
-<div className='styps-logo'>
-<Link href="/" className="site-header-logo">
-  <img src="/logo.png" alt="Logo" width={400} height={400} />
-</Link>
+<div className='subscribe-box'>
+<h3 className='subscribe-title'></h3>
+<div className='subscribe-form'>
+{klaviyoFormLoaded && (
+<div className="klaviyo-form-UeNcKv"></div>
+)}
+<h3></h3>
 </div>
 </div>
-
-<div>
-<div class="klaviyo-form-UeNcKv"></div>
-</div>
-
-<div>
-<p>©2023 Styps Ltd</p>
-</div>
-
-
-
-
-
 </div>
 </footer>
-
 </div>
 );
 };

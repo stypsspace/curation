@@ -73,20 +73,22 @@ h3{
 
 
     .klaviyo-form{
-      width: 300px !important;
-      margin-left: 25px !important;
+    width: 340px !important;
     }
 
 
     .klaviyo-form input{
-    text-align: center!important;  
+    /*text-align: center!important; */ 
     font-weight: 500 !important;
+    padding: 0px 0px 0px 16px !important;
     }
 
     .klaviyo-form button{
-      display:none !important;
+      position: relative;
     }
 
+
+   
 
     
 /*************************************************************************
