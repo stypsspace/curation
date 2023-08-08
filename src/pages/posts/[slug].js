@@ -56,14 +56,14 @@ const Post = ({ post, relatedPosts, initialPageViews }) => {
     <div className='post-single-wrap'>
       <div className=''>
 
-      <div className="site-description">
+      <div className="single-site-description">
           <p>
-          {post.fields.title}
+          
             </p>
             </div>
 
         <div className='post-single-header'>
-          <h3>{post.fields.title}</h3>
+          <div className='post-single-pageviews'>{pageViews} views</div>
           <span className='post-single-externalurl'>
             {externalUrl && (
               <a href={externalUrl} target='_blank' rel='noopener noreferrer' className='mt-4 text-blue-500 underline'>
@@ -73,6 +73,15 @@ const Post = ({ post, relatedPosts, initialPageViews }) => {
           </span>
         </div>
 
+       
+           
+            
+             
+           
+         
+
+        <a href={externalUrl} target='_blank' rel='noopener noreferrer' className='mt-4 text-blue-500 underline'>
+                
         <div className='post-single-image'>
           {post.fields.coverImage?.fields?.file && (
             <ContentfulImage
@@ -103,7 +112,7 @@ const Post = ({ post, relatedPosts, initialPageViews }) => {
             </div>
           </div>
         )}
-
+ </a>
         <div className='post-date'>
           <time dateTime={new Date(post.fields.date).toISOString().slice(0, 10)}>
             {new Date(post.fields.date).toLocaleDateString('en-US', {
@@ -132,11 +141,12 @@ const Post = ({ post, relatedPosts, initialPageViews }) => {
         </div>
 
         <div className='post-single-content'>
-          <RichText content={content} />
+        <h3 className='post-single-content-title'>{post.fields.title}</h3>
+        <div className='post-single-paragraph'><RichText content={content} /></div>
         </div>
 
          {/* Display the updated page view count */}
-         <p>{pageViews} views</p>
+         
 
         {/* Display related posts */}
         <div className='related-posts-wrap'>
