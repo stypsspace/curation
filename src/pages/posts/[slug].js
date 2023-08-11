@@ -57,21 +57,10 @@ const Post = ({ post, relatedPosts, initialPageViews }) => {
       <div className=''>
 
       <div className="single-site-description">
-          <p>
-          
-            </p>
+      <div className="single-site-description-content">{post.fields.title}</div>
             </div>
 
-        <div className='post-single-header'>
-          <div className='post-single-pageviews'>{pageViews} views</div>
-          <span className='post-single-externalurl'>
-            {externalUrl && (
-              <a href={externalUrl} target='_blank' rel='noopener noreferrer' className='mt-4 text-blue-500 underline'>
-                Open
-              </a>
-            )}
-          </span>
-        </div>
+       
 
        
            
@@ -141,12 +130,25 @@ const Post = ({ post, relatedPosts, initialPageViews }) => {
         </div>
 
         <div className='post-single-content'>
+        <div className='post-single-header'>
         <h3 className='post-single-content-title'>{post.fields.title}</h3>
-        <div className='post-single-paragraph'><RichText content={content} /></div>
+          <span className='post-single-externalurl'>
+            {externalUrl && (
+              <a href={externalUrl} target='_blank' rel='noopener noreferrer' className='mt-4 text-blue-500 underline'>
+                View
+              </a>
+            )}
+          </span>
         </div>
 
-         {/* Display the updated page view count */}
-         
+        
+        <div className='post-single-paragraph'>
+        <div className="post-single-paragraph-pageviews">{pageViews} views </div>
+          <RichText content={content} />
+          </div>
+       
+        </div>
+
 
         {/* Display related posts */}
         <div className='related-posts-wrap'>
@@ -164,7 +166,7 @@ const Post = ({ post, relatedPosts, initialPageViews }) => {
                   {relatedPost.fields.externalUrl && (
                     <span className='related-posts-externalurl'>
                       <a href={relatedPost.fields.externalUrl} target='_blank' rel='noopener noreferrer'>
-                        <button>Open</button>
+                        <button>View</button>
                       </a>
                     </span>
                   )}

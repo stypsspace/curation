@@ -45,6 +45,8 @@ Menu
 <main className='wrap'>{children}</main>
 
 <footer className='site-footer'>
+
+<div className='site-footer-inner'>
 <div className='site-footer-content'>
 
 <div className='subscribe-box'>
@@ -59,13 +61,15 @@ Menu
 </div>
 
 <div className='site-footer-nav'>
-<span className='site-footer-nav-help'>Help</span>
-<span className='site-footer-nav-social'>Social</span>
-<span className='site-footer-nav-copyright'>©2023</span>
+<div className='site-footer-nav-help'>Help</div>
+<div className='site-footer-nav-social'>Social</div>
+<div className='site-footer-nav-copyright'>©2023</div>
 </div>
 
+</div>
 </footer>
 </div>
+
 );
 };
 

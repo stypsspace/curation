@@ -54,7 +54,7 @@ const Posts = ({ posts }) => {
                 <span className='post-externalurl'>
                   {externalUrl && (
                     <a href={externalUrl} target='_blank' rel='noopener noreferrer'>
-                      <button>Open</button>
+                      <button>View</button>
                     </a>
                   )}
                 </span>
