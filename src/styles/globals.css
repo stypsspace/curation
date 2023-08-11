@@ -72,6 +72,12 @@ h3{
     }
 
 
+    body p{
+      color:#fefefe; 
+    }
+
+
+
     .klaviyo-form{
     width: 340px !important;
     }
@@ -80,7 +86,7 @@ h3{
     .klaviyo-form input{
     /*text-align: center!important; */ 
     font-weight: 500 !important;
-    padding: 0px 0px 0px 16px !important;
+    padding: 0px 0px 0px 7px !important;
     }
 
     .klaviyo-form button{

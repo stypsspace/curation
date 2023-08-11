@@ -34,29 +34,7 @@ const Posts = ({ posts }) => {
         <title>Styps — Curated websites for inspiration and promotion of good design</title>
       </Head>
 
-      <div className='filter-container-wrap'>
-        <ul className='filter-container'>
-          <li>
-            <button onClick={() => handleCategoryChange('')}>All</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('Portfolio')}>Portfolio</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('Personal')}>Personal</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('App')}>App</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('Commerce')}>Commerce</button>
-          </li>
-          <li>
-            <button onClick={() => handleCategoryChange('Technology')}>Technology</button>
-          </li>
-        </ul>
-      </div>
-
+    
       <div className='site-description'>
         <p>Curated websites for inspiration and promotion of good design</p>
       </div>
@@ -144,6 +122,30 @@ const Posts = ({ posts }) => {
           );
         })}
       </ul>
+
+      <div className='filter-container-wrap'>
+        <ul className='filter-container'>
+          <li>
+            <button onClick={() => handleCategoryChange('')}>All</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('Portfolio')}>Portfolio</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('Personal')}>Personal</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('App')}>App</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('Commerce')}>Commerce</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('Technology')}>Technology</button>
+          </li>
+        </ul>
+      </div>
+
     </div>
   );
 };

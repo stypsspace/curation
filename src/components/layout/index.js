@@ -46,16 +46,24 @@ Menu
 
 <footer className='site-footer'>
 <div className='site-footer-content'>
+
 <div className='subscribe-box'>
-<h3 className='subscribe-title'></h3>
+<p className='subscribe-top'>Best websites in your inbox</p>
+<p className='subscribe-bottom'>No spam</p>
 <div className='subscribe-form'>
 {klaviyoFormLoaded && (
 <div className="klaviyo-form-UeNcKv"></div>
 )}
-<h3></h3>
 </div>
 </div>
 </div>
+
+<div className='site-footer-nav'>
+<span className='site-footer-nav-help'>Help</span>
+<span className='site-footer-nav-social'>Social</span>
+<span className='site-footer-nav-copyright'>©2023</span>
+</div>
+
 </footer>
 </div>
 );
