@@ -146,7 +146,8 @@ position: relative;
 
 /*Post filter wrap */
 .filter-container-wrap{
-display:block;
+  z-index: 1;
+  position: relative;
 }
 
 /*Post filter content */
