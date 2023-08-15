@@ -19,6 +19,37 @@ const Posts = ({ posts }) => {
   const [isFilterContainerVisible, setIsFilterContainerVisible] = useState(false);
 
 
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const footer = document.querySelector('.site-footer');
+      const footerPosition = footer.getBoundingClientRect().top;
+      const filterContainerWrap = document.querySelector('.filter-container-wrap');
+  
+      if (footerPosition <= window.innerHeight) {
+        filterContainerWrap.classList.add('absolute');
+      } else {
+        filterContainerWrap.classList.remove('absolute');
+      }
+    };
+  
+    window.addEventListener('scroll', handleScroll);
+  
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  
+  
+  
+  
+  
+
+
+
+
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
   };

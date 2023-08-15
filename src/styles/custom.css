@@ -159,6 +159,17 @@ border-radius: 6px;
 padding:8px;
 }
 
+
+/* New styles for absolute position */
+.filter-container-wrap.absolute {
+  position: absolute;
+  bottom: auto;
+  /*top: calc(100% - 12px);  Adjust the value as needed */
+  top: calc(100% - 34px); 
+  opacity:0;
+  transition: opacity 0.5s ease-in-out; 
+}
+
 /*Post filter content */
 .filter-container{
 /*display: flex;
