@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import client from 'src/lib/contentful';
 import Image from 'next/image';
@@ -138,12 +138,14 @@ const Posts = ({ posts }) => {
       <div className='filter-container-wrap'>
       <div className='filter-container-header' onClick={toggleFilterContainer}>
         <div className='filter-container-header-title'>Filter</div>
+
         {isFilterContainerVisible ? (
           <div className='filter-container-header-minusicon'></div>
         ) : (
           <div className='filter-container-header-plusicon'></div>
         )}
       </div>
+      
       {isFilterContainerVisible && (
         <ul className='filter-container'>
             <li>
