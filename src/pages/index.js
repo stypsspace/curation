@@ -16,9 +16,16 @@ const ContentfulImage = (props) => {
 
 const Posts = ({ posts }) => {
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [isFilterContainerVisible, setIsFilterContainerVisible] = useState(false);
+
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
+  };
+
+
+  const toggleFilterContainer = () => {
+    setIsFilterContainerVisible((prevState) => !prevState);
   };
 
   // Filter posts based on the selected category
@@ -49,16 +56,7 @@ const Posts = ({ posts }) => {
           const { title, slug, coverImage, video, date, author, externalUrl } = post.fields;
           return (
             <li className='' key={slug}>
-              <div className='post-header'>
-                <h3>{title}</h3>
-                <span className='post-externalurl'>
-                  {externalUrl && (
-                    <a href={externalUrl} target='_blank' rel='noopener noreferrer'>
-                      <button>View</button>
-                    </a>
-                  )}
-                </span>
-              </div>
+              
               <div className='post-image'>
                 <Link href={`/posts/${slug}`} aria-label={title}>
                   {coverImage && coverImage.fields && coverImage.fields.file && (
@@ -118,14 +116,37 @@ const Posts = ({ posts }) => {
                 </div>
                 <div className='author-name'>{author.fields.name}</div>
               </div>
+
+
+              <div className='post-header'>
+                <h3>{title}</h3>
+                <span className='post-externalurl'>
+                  {externalUrl && (
+                    <a href={externalUrl} target='_blank' rel='noopener noreferrer'>
+                      <button>View</button>
+                    </a>
+                  )}
+                </span>
+              </div>
+
+
             </li>
           );
         })}
       </ul>
 
       <div className='filter-container-wrap'>
+      <div className='filter-container-header' onClick={toggleFilterContainer}>
+        <div className='filter-container-header-title'>Filter</div>
+        {isFilterContainerVisible ? (
+          <div className='filter-container-header-minusicon'></div>
+        ) : (
+          <div className='filter-container-header-plusicon'></div>
+        )}
+      </div>
+      {isFilterContainerVisible && (
         <ul className='filter-container'>
-          <li>
+            <li>
             <button onClick={() => handleCategoryChange('')}>All</button>
           </li>
           <li>
@@ -144,7 +165,11 @@ const Posts = ({ posts }) => {
             <button onClick={() => handleCategoryChange('Technology')}>Technology</button>
           </li>
         </ul>
-      </div>
+      )}
+    </div>
+
+
+
 
     </div>
   );
