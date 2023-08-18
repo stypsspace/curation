@@ -137,9 +137,7 @@ return (
 </div>
 
 <div className='site-footer-nav'>
-<div className='site-footer-nav-help'>Help</div>
-<div className='site-footer-nav-social'>Social</div>
-<div className='site-footer-nav-copyright'>©2023</div>
+<div className='site-footer-nav-copyright'>©2023 Styps</div>
 </div>
 
 </div>
