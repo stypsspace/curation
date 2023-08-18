@@ -75,6 +75,11 @@ color:#e1e1e1;
 }
 
 
+body li, 
+body li a{
+line-height: 16px;
+}
+
 body a{
 color:#e1e1e1; 
 }
