@@ -2,101 +2,109 @@
 Reset
 ******************************************************************/
 *{
-  margin:0;
-  padding:0;
-  box-sizing: border-box;
-  }
-  
-  :host{
-  display:none !important;
-  }
+margin:0;
+padding:0;
+box-sizing: border-box;
+}
 
-  #detach-button-host{
-  display:none !important; 
-  }
-  
-  img, svg {
-  display:block;
-  max-width:100%;   
-  }
-  
-  a{
-  text-decoration:none;  
-  color:#000;
-  }
-  
-  li{
-  list-style: none;   
-  }
-  
-  button,
-  input,
-  select,
-  textarea {
-  outline:none;
-  border:none;
-  background:transparent; 
-  -webkit-appearance: none; 
-  -moz-appearance: none; 
-  -ms-appearance: none; 
-  -o-appearance: none; 
-  appearance: none;  
-  }
-  
+:host{
+display:none !important;
+}
 
-  h1, h2, h3, h4, h5,h6{
-  font-weight:normal;  
-  }
+#detach-button-host{
+display:none !important; 
+}
+
+img, svg {
+display:block;
+max-width:100%;   
+}
+
+a{
+text-decoration:none;  
+color:#000;
+}
+
+li{
+list-style: none;   
+}
+
+
+ul{
+margin:0;
+padding:0;
+}
+
+button,
+input,
+select,
+textarea {
+outline:none;
+border:none;
+background:transparent; 
+-webkit-appearance: none; 
+-moz-appearance: none; 
+-ms-appearance: none; 
+-o-appearance: none; 
+appearance: none;  
+}
+
+
+h1, h2, h3, h4, h5,h6{
+font-weight:normal;  
+}
 
 h3{
-  font-size:14px;  
-    }
- 
-    body{
-     background-color: rgb(0, 0, 0, 0.95);
-     color:#fefefe; 
-    }
+font-size:14px;  
+}
+
+body{
+/*background-color: rgb(0, 0, 0, 0.95);
+color:#fefefe; */
+background:#0B0B0B;
+color:#e1e1e1;
+}
 
 
-    body button{
-      color:#fefefe;  
-    }
+body button{
+color:#e1e1e1; 
+}
 
-    body header ul li a{
-      color:#fefefe; 
-    }
-
-
-    body a{
-      color:#fefefe; 
-    }
+body header ul li a{
+color:#e1e1e1; 
+}
 
 
-    body p{
-      color:#fefefe; 
-    }
+body a{
+color:#e1e1e1; 
+}
+
+
+body p{
+color:#e1e1e1; 
+}
 
 
 
-    .klaviyo-form{
-    width: 340px !important;
-    }
+.klaviyo-form{
+width: 340px !important;
+}
 
 
-    .klaviyo-form input{
-    /*text-align: center!important; */ 
-    font-weight: 500 !important;
-    padding: 0px 0px 0px 7px !important;
-    }
+.klaviyo-form input{
+/*text-align: center!important; */ 
+font-weight: 500 !important;
+padding: 0px 0px 0px 7px !important;
+}
 
-    .klaviyo-form button{
-      position: relative;
-    }
+.klaviyo-form button{
+position: relative;
+}
 
 
-   
 
-    
+
+
 /*************************************************************************
 Globals
 **************************************************************************/
@@ -104,27 +112,27 @@ Globals
 
 
 html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+height: 100%;
+margin: 0;
+padding: 0;
 }
 
 .site-wrapper {
-  display: grid;
-  grid-template-rows: auto 1fr auto; /* Update grid-template-rows */
-  min-height: 100vh;
+display: grid;
+grid-template-rows: auto 1fr auto; /* Update grid-template-rows */
+min-height: 100vh;
 }
 
 .site-header {
-  grid-row: 1; /* Header in the first row */
+grid-row: 1; /* Header in the first row */
 }
 
 .wrap {
-  grid-row: 2; /* Main content in the second row */
+grid-row: 2; /* Main content in the second row */
 }
 
 .site-footer {
-  grid-row: 3; /* Footer in the last row */
+grid-row: 3; /* Footer in the last row */
 }
 
 

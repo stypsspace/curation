@@ -166,6 +166,9 @@ const Posts = ({ posts }) => {
         })}
       </ul>
 
+
+      <div className='open-filter-container'></div>
+      
       <div className='filter-container-wrap'>
       <div className='filter-container-header' onClick={toggleFilterContainer}>
         <div className='filter-container-header-title'>Filter</div>
