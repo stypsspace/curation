@@ -151,13 +151,6 @@ const Posts = ({ posts }) => {
 
               <div className='post-header'>
                 <h3>{title}</h3>
-                <span className='post-externalurl'>
-                  {externalUrl && (
-                    <a href={externalUrl} target='_blank' rel='noopener noreferrer'>
-                      <button>View</button>
-                    </a>
-                  )}
-                </span>
               </div>
 
 
@@ -168,7 +161,7 @@ const Posts = ({ posts }) => {
 
 
       <div className='open-filter-container'></div>
-      
+
       <div className='filter-container-wrap'>
       <div className='filter-container-header' onClick={toggleFilterContainer}>
         <div className='filter-container-header-title'>Filter</div>

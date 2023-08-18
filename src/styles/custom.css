@@ -30,21 +30,6 @@ border-radius: 10px;
 z-index:1;
 }
 
-/* Site description */
-.site-description{
-position:relative;
-width:100%;  
-}
-
-.site-description p{
-position:relative;
-width:500px;  
-text-align: center;
-margin:0 auto;
-font-size:28px;
-margin-top: 120px;
-margin-bottom:157px;
-}
 
 
 /********************************************************************
@@ -241,14 +226,31 @@ Index.js
 /* Categories grid */
 .category-container{
 display: grid;
-grid-template-columns:repeat(3, 1fr);
-grid-column-gap:7px;
-width:100%;  
-padding-left:10px;
-padding-right:10px;
+grid-template-columns:repeat(4, 1fr);
+grid-column-gap:10px;
+/*width:100%;*/  
+width:95%; 
+margin: 0 auto;
+/*padding-left:10px;
+padding-right:10px;*/
 }
 
 
+/* Site description */
+.site-description{
+  position:relative;
+  width:100%;  
+  }
+  
+  .site-description p{
+  position:relative;
+  width:500px;  
+  text-align: center;
+  margin:0 auto;
+  font-size:25px;
+  margin-top: 120px;
+  margin-bottom:157px;
+  }
 
 
 /* Wrap */
@@ -257,116 +259,7 @@ position: relative;
 }
 
 
-/*Open filter wrap */
-.open-filter-container{
-cursor:pointer;
-text-align: center;
-z-index: 2;
-position: fixed;
-left:0;
-right:0;
-bottom:20px;
-}
 
-.open-filter-container::before {
-content: '\002B'; /* Unicode character for plus sign */
-font-size: 11px; /* Adjust the size as needed */
-font-family: 400;
-background: #151515;
-padding:8px 12px;
-border-radius: 6px;
-color:#e1e1e1;
-cursor:pointer;
-}
-
-
-/*Post filter wrap */
-.filter-container-wrap{
-z-index: 1;
-position: relative;
-width:300px;
-position:fixed;
-bottom:12px;
-right:10px;
-background: rgba(34,34,34,.5);
--webkit-backdrop-filter: blur(24px);
-backdrop-filter: blur(24px);
-border-radius: 6px;
-padding:8px;
-display:none;
-}
-
-
-/* New styles for absolute position */
-.filter-container-wrap.absolute {
-position: absolute;
-bottom: auto;
-/*top: calc(100% - 12px);  Adjust the value as needed */
-top: calc(100% - 34px); 
-opacity:0;
-transition: opacity 0.5s ease-in-out; 
-}
-
-/*Post filter content */
-.filter-container{
-/*display: flex;
-justify-content: space-between;
-align-items: center;
-width:25%; 
-padding-left:10px;
-padding-right:10px;*/
-position: relative;
-padding-top: 30px;
-}
-
-.filter-container li button{
-color:#333;
-}
-
-
-
-.filter-container li button:hover{
-color:#fefefe;
-transition: 0.3s ease-in-out;
--webkit-transition: 0.3s ease-in-out;
--moz-transition: 0.3s ease-in-out;
-}
-
-
-
-
-
-
-
-
-.filter-container-header{
-display: flex;
-justify-content: space-between;
-align-items: center; 
-cursor:pointer;
-}
-
-
-
-.filter-container-header-plusicon::before {
-content: '\002B'; /* Unicode character for plus sign */
-font-size: 12px; /* Adjust the size as needed */
-font-family: 400;
-}
-
-
-.filter-container-header-minusicon::before {
-content: '\2212'; /* Unicode character for minus sign */
-font-size: 12px; /* Adjust the size as needed */
-font-family: 400;
-}
-
-
-
-.filter-container button{
-position: relative;  
-cursor: pointer;
-}
 
 
 /*Post header */
@@ -382,7 +275,6 @@ padding-bottom:5px;
 .post-header h3{
 position: relative; 
 top:1px;
-font-size:13px;
 }
 
 .post-externalurl{
@@ -428,6 +320,14 @@ height:auto;
 position: relative; 
 padding-bottom:4px;
 padding-top:44px; 
+
+}
+
+
+video{
+  /*background: #000;
+  padding:10px;*/
+  border-radius: 8px;
 }
 
 .author-name-wrap{
@@ -437,9 +337,115 @@ display:none;
 
 
 
+/***************************************************************************
+Filter
+***************************************************************************/
 
-
-
+/*Open filter wrap */
+.open-filter-container{
+  cursor:pointer;
+  text-align: center;
+  z-index: 2;
+  position: fixed;
+  left:0;
+  right:0;
+  bottom:20px;
+  }
+  
+  .open-filter-container::before {
+  content: '\002B'; /* Unicode character for plus sign */
+  font-size: 11px; /* Adjust the size as needed */
+  font-family: 400;
+  background: #151515;
+  padding:10px 15px;
+  border-radius: 6px;
+  color:#e1e1e1;
+  cursor:pointer;
+  }
+  
+  
+  /*Post filter wrap */
+  .filter-container-wrap{
+  z-index: 1;
+  position: relative;
+  width:300px;
+  position:fixed;
+  bottom:12px;
+  right:10px;
+  background: rgba(34,34,34,.5);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  border-radius: 6px;
+  padding:8px;
+  display:none;
+  }
+  
+  
+  /* New styles for absolute position */
+  .filter-container-wrap.absolute {
+  position: absolute;
+  bottom: auto;
+  /*top: calc(100% - 12px);  Adjust the value as needed */
+  top: calc(100% - 34px); 
+  opacity:0;
+  transition: opacity 0.5s ease-in-out; 
+  }
+  
+  /*Post filter content */
+  .filter-container{
+  /*display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width:25%; 
+  padding-left:10px;
+  padding-right:10px;*/
+  position: relative;
+  padding-top: 30px;
+  }
+  
+  .filter-container li button{
+  color:#333;
+  }
+  
+  
+  
+  .filter-container li button:hover{
+  color:#fefefe;
+  transition: 0.3s ease-in-out;
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  }
+  
+  
+  
+  .filter-container-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  cursor:pointer;
+  }
+  
+  
+  
+  .filter-container-header-plusicon::before {
+  content: '\002B'; /* Unicode character for plus sign */
+  font-size: 12px; /* Adjust the size as needed */
+  font-family: 400;
+  }
+  
+  
+  .filter-container-header-minusicon::before {
+  content: '\2212'; /* Unicode character for minus sign */
+  font-size: 12px; /* Adjust the size as needed */
+  font-family: 400;
+  }
+  
+  
+  
+  .filter-container button{
+  position: relative;  
+  cursor: pointer;
+  }
 
 
 
