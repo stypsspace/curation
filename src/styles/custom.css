@@ -506,11 +506,11 @@ Filter
 /*Open filter wrap */
 .open-filter-container{
   cursor:pointer;
-  text-align: center;
+  text-align: right;
   z-index: 2;
   position: fixed;
   left:0;
-  right:0;
+  right:10px;
   bottom:20px;
   }
   
@@ -909,10 +909,10 @@ margin-left:auto;
 margin-right:auto;
 margin-bottom: 20px;
 background: #0E0E0E;
-padding-top:15px;
-padding-left:10px;
-padding-right:10px;
-padding-bottom:10px;
+padding-top:25px;
+padding-left:20px;
+padding-right:20px;
+padding-bottom:20px;
 border-radius: 10px;
 }
 
@@ -961,6 +961,7 @@ margin-top:80px;
 margin-left:auto;
 margin-right:auto;
 bottom:10px;
+text-align: center;
 }
 
 .site-footer-nav-help,
