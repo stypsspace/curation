@@ -79,5 +79,84 @@ padding-top:50px;
 
 
 
+/*******************************************************************
+Max-width:768px and min-width:0px
+********************************************************************/
+@media only screen and (max-width:768px) and (min-width:0px){
 
+body{
+font-size:13px;    
+}
+
+body a,
+body h3,
+body span a,
+body p,
+body ul li,
+body header,
+body footer{
+font-size:13px;    
+}
+
+
+ /* Navigation */
+.site-header-nav-wrap{
+width:95%;
+height:40px;
+}   
+
+.site-header-menu{
+width:95%;   
+}
+
+ul.site-header-menu-content li{
+position: relative; 
+padding-right: 20px;
+color:#333;
+cursor: pointer;
+font-weight:500;
+}
+
+ul.site-header-menu-content li a{
+color:#333;
+cursor: pointer;
+font-weight:500;
+}
+    
+
+/* Site description */
+.site-description{
+position:relative;
+width:100%;  
+}
+
+.site-description p{
+position:relative;
+width:85%;  
+text-align: center;
+margin-left:auto;
+margin-right:auto;
+font-size:25px;
+margin-top: 60px;
+margin-bottom:80px;
+}
+
+    
+.subscribe-box{
+margin-top: 200px;
+margin-left:auto;
+margin-right:auto;
+margin-bottom: 20px;
+background: #0E0E0E;
+padding-top:25px;
+padding-left:0px;
+padding-right:0px;
+padding-bottom:15px;
+border-radius: 10px;
+width:355px;
+}
+
+
+
+}
 

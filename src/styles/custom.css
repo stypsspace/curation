@@ -39,16 +39,18 @@ Header nav
 /* Navigation */
 .site-header-nav-wrap{
 /*width:98.8%;*/
-width:500px;
-background:#0E0E0E;
+width:33.3%;
+height:40px;
+/*background:#0E0E0E;*/
+background:#111;
 border-radius: 8px;
 margin-top:10px; 
-padding-left:5px;
+/*padding-left:5px;
 padding-right:5px; 
 padding-top:6px;
-padding-bottom: 6px;
+padding-bottom: 6px;*/
 position:fixed;
-height: auto;
+/*height: auto;*/
 margin:0 auto;
 top:10px;
 left:0px;
@@ -69,11 +71,12 @@ width:100%;
 
 /* Logo */
 .styps-logo{  
-width:25px; 
+width:28px; 
 height:auto;
 position: relative; 
 display:block; 
-left:5px;
+top:5px;
+left:10px;
 }
 
 .styps-logo img{
@@ -85,16 +88,18 @@ display:block
 /*Open menu button */
 .open-site-header-menu{
 position:relative;
+top:6px;
+right:6px;
 font-size:15px;
 font-weight:800;
 letter-spacing:1px;
 cursor: pointer;
-background: #151515;
+background: #222;
 border-radius: 6px;
 padding-top:0px;
 padding-left:12px;
-  padding-right:12px;
-  padding-bottom:8px;
+padding-right:12px;
+padding-bottom:8px;
 }
 
 
@@ -113,27 +118,21 @@ Header menu
 *******************************************************************/
 
 .site-header-menu{
-/*width:98.8%;*/
-width:500px;
-background:#0E0E0E;
+justify-content: space-between;
+align-items: center;
+display: none;
+transition: opacity 0.5s ease-in-out; 
+opacity: 1;
+width:33.3%;
+height:40px;
+background:#111;
 border-radius: 8px;
 margin-top:10px; 
-padding-left:5px;
-padding-right:5px; 
-padding-top:6px;
-padding-bottom: 6px;
 position:fixed;
-height: auto;
 margin:0 auto;
 top:10px;
 left:0px;
 right:0px;
-justify-content: space-between;
-align-items: center;
-
-display: none;
-transition: opacity 0.5s ease-in-out; 
-opacity: 1;
 }
 
 
@@ -910,10 +909,11 @@ margin-right:auto;
 margin-bottom: 20px;
 background: #0E0E0E;
 padding-top:25px;
-padding-left:20px;
-padding-right:20px;
-padding-bottom:20px;
+padding-left:0px;
+padding-right:0px;
+padding-bottom:15px;
 border-radius: 10px;
+width:370px;
 }
 
 
@@ -924,11 +924,12 @@ font-size:20px;
 }
 
 .subscribe-form{
-width: 337px; 
+  width: 338px;
 margin-top: 50px;
 margin-left:auto;
 margin-right:auto;
 background:#111;
+position:relative;
 /*background: rgba(34,34,34,.5);
 -webkit-backdrop-filter: blur(24px);
 backdrop-filter: blur(24px);*/
