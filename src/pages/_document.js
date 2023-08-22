@@ -8,7 +8,6 @@ return (
 <Head>
 {/* Add your favicon link here */}
 <link rel="icon" href="/favicon_2.ico" type="image/x-icon" />
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
 {/* Klaviyo */}
 <script
