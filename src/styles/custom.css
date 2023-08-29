@@ -440,6 +440,7 @@ top:1px;
 
 .post-externalurl{
 position: relative; 
+z-index: 1;
 }
 
 
@@ -496,7 +497,33 @@ color:#fff;
 display:none;
 }
 
+/* Advert */
+.advert-title{
+ display:none; 
+}
 
+.advert-button{
+position:relative;
+top:32px;
+left:5px;
+z-index:2;
+cursor: pointer; 
+background: #333;
+border-radius: 5px;
+padding-top:5px;
+padding-left: 8px;
+padding-right: 8px;
+padding-bottom: 5px;
+font-size:13px;  
+}
+
+
+
+.advert-image img{
+  border-radius: 10px; 
+  width:100%;
+  height:auto;
+  }
 
 /***************************************************************************
 Filter
