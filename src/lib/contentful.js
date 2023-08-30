@@ -16,4 +16,24 @@ export async function getAdvertEntries() {
   }
 }
 
+// Function to create a new "Advert" entry with a timestamp
+export async function createAdvertWithTimestamp(title, otherFields) {
+  try {
+    const currentTimestamp = new Date().toISOString();
+    const newAdvertEntry = await client.createEntry('advert', {
+      fields: {
+        title,
+        timestamp: currentTimestamp, // Your timestamp field
+        ...otherFields, // Include other fields for the "Advert" entry
+      },
+    });
+
+    console.log('New Advert Entry:', newAdvertEntry);
+    return newAdvertEntry;
+  } catch (error) {
+    console.error('Error creating Advert:', error);
+    return null; // Return null in case of an error
+  }
+}
+
 export default client;

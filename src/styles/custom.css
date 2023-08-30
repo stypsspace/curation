@@ -470,19 +470,20 @@ display:none;
 
 .post-image{
 position: relative;
+padding-top:69px; 
 }
 
 .post-image img{
 width:100%;
 height:auto;  
+border-radius: 10px; 
 }
 
 
 .post-video{
 position: relative; 
 padding-bottom:4px;
-padding-top:44px; 
-
+/*padding-top:44px; */
 }
 
 
@@ -497,15 +498,23 @@ color:#fff;
 display:none;
 }
 
+
+
+
+
 /* Advert */
+.advert-image{
+padding-top:44px; 
+}
+
 .advert-title{
  display:none; 
 }
 
 .advert-button{
 position:relative;
-top:32px;
-left:5px;
+top:75px;
+left:3px;
 z-index:2;
 cursor: pointer; 
 background: #333;
