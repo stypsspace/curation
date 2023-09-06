@@ -17,14 +17,15 @@ export async function getAdvertEntries() {
 }
 
 // Function to create a new "Advert" entry with a timestamp
-export async function createAdvertWithTimestamp(title, otherFields) {
+export async function createAdvertWithTimestamp(title, category, otherFields) {
   try {
     const currentTimestamp = new Date().toISOString();
     const newAdvertEntry = await client.createEntry('advert', {
       fields: {
         title,
-        timestamp: currentTimestamp, // Your timestamp field
-        ...otherFields, // Include other fields for the "Advert" entry
+        category, // Set the category field for "Advert" entries
+        timestamp: currentTimestamp,
+        ...otherFields,
       },
     });
 

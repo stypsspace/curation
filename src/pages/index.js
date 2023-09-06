@@ -50,9 +50,12 @@ const Home = ({ combinedEntries }) => {
  // ... Define other functions as needed (e.g., toggleFilterContainer)
 
 
-  const filteredEntries = combinedEntries.filter(
-    (entry) => !selectedCategory || entry.fields.category === selectedCategory
-  );
+ const filteredEntries = combinedEntries.filter(
+  (entry) =>
+    !selectedCategory ||
+    entry.fields.category === selectedCategory ||
+    (entry.sys.contentType.sys.id === 'advert' && entry.fields.category === selectedCategory)
+);
 
   return (
     <div>
@@ -90,6 +93,8 @@ const Home = ({ combinedEntries }) => {
 
     // Inside your Home component
     console.log('filteredEntries:', filteredEntries);
+
+
 
 
 
@@ -149,6 +154,8 @@ const Home = ({ combinedEntries }) => {
                   </a>
                 </li>
               );
+
+              
             } else {
               // It's a "Post" entry
               return (
