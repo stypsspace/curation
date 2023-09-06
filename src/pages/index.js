@@ -15,6 +15,8 @@ const ContentfulImage = (props) => {
 const Home = ({ combinedEntries }) => {
   const [selectedCategory, setSelectedCategory] = useState('');
 
+
+
    // Define other state variables and functions here as needed
   // ...
 
@@ -85,6 +87,11 @@ const Home = ({ combinedEntries }) => {
           
           .map((entry) => {
             const { title, slug, coverImage, video, date, author, externalUrl } = entry.fields;
+
+    // Inside your Home component
+    console.log('filteredEntries:', filteredEntries);
+
+
 
             // Check if it's an "Advert" entry
             if (entry.sys.contentType.sys.id === 'advert') {
@@ -224,28 +231,38 @@ const Home = ({ combinedEntries }) => {
 
 // Fetch "Post" and "Advert" entries and combine them
 export async function getStaticProps() {
-  const postResponse = await client.getEntries({
-    content_type: 'post',
-    order: '-sys.createdAt', // Sort by createdAt field in descending order (latest first)
-  });
+  try {
+    const postResponse = await client.getEntries({
+      content_type: 'post',
+      order: '-sys.createdAt',
+    });
 
-  const advertResponse = await getAdvertEntries();
+    const advertResponse = await getAdvertEntries();
+    console.log('Advert Response:', advertResponse);
 
-  const posts = postResponse.items.map((post) => ({
-    sys: post.sys,
-    fields: post.fields,
-  }));
+    const posts = postResponse.items.map((post) => ({
+      sys: post.sys,
+      fields: post.fields,
+    }));
 
-  const advertItems = Array.isArray(advertResponse?.items) ? advertResponse.items : [];
+    const advertItems = Array.isArray(advertResponse?.items) ? advertResponse.items : [];
+    console.log('Advert Items:', advertItems);
 
-  // Combine "Post" and "Advert" entries into a single array
-  const combinedEntries = [...posts, ...advertItems];
+    const combinedEntries = [...posts, ...advertItems];
 
-  return {
-    props: {
-      combinedEntries,
-    },
-  };
+    return {
+      props: {
+        combinedEntries,
+      },
+    };
+  } catch (error) {
+    console.error('Error fetching entries:', error);
+    return {
+      props: {
+        combinedEntries: [],
+      },
+    };
+  }
 }
 
 export default Home;
