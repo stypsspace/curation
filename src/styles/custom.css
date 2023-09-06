@@ -396,6 +396,18 @@ padding-right:10px;*/
 }
 
 
+
+.filter-wrap{
+position:relative;
+padding:20px;
+}
+
+.filter-wrap select{
+color:#fff;
+cursor: pointer;
+}
+
+
 /* Site description */
 .site-description{
   position:relative;
