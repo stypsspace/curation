@@ -14,7 +14,7 @@ const ContentfulImage = (props) => {
 };
 
 const ProductPage = ({ product, relatedProducts }) => {
-  const { title, image, video, slug, description, price, content } = product.fields;
+  const { title, image, video, slug, description, price, content, externalUrl } = product.fields;
 
   // Sort the related products array by createdAt date in descending order
   const sortedRelatedProducts = relatedProducts.sort((product1, product2) => {
@@ -31,9 +31,7 @@ const ProductPage = ({ product, relatedProducts }) => {
       <Link href="/shop">Back to Shop</Link>
 
       <div className="product-content">
-        <h1>{title}</h1>
-        <p>{description}</p>
-        <p>Price: {price}</p>
+       
 
         <div className="product-image">
           <Link href={`/shop/${slug}`} aria-label={title}>
@@ -65,7 +63,20 @@ const ProductPage = ({ product, relatedProducts }) => {
           </Link>
         </div>
 
-        <div className='post-single-paragraph'>
+       <div className='product-single-title'>
+        <h1>{title}</h1>
+        <p>{description}</p>
+        <p>Price: {price}</p>
+        <span className='product-single-externalurl'>
+            {externalUrl && (
+              <a href={externalUrl} target='_blank' rel='noopener noreferrer' className='mt-4 text-blue-500 underline'>
+                Buy
+              </a>
+            )}
+          </span>
+        </div>
+
+        <div className='product-single-paragraph'>
           <RichText content={content} />
         </div>
       </div>

@@ -923,13 +923,20 @@ padding-left: 10px;
 Shop
 ***********************************************************************/
 
-.shop-container{
+ul.shop-container{
   display: grid;
   grid-template-columns:repeat(2, 1fr);
   grid-column-gap:10px;
   width:95%; 
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   }
+
+
+  ul.shop-container li{
+  margin-bottom: 50px;  
+  }
+
 
 /*Post header */
 .shop-header{
@@ -955,6 +962,11 @@ width:80%;
 margin:0 auto;
 }
 
+.product-single-title{
+position:relative;
+margin-top: 50px;
+margin-bottom:50px;
+}
 
 
 .related-products-title{
