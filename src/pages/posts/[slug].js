@@ -234,7 +234,7 @@ loading='lazy'
 </div>
 
 {relatedPost.fields.video && (
-<div className='post-video'>
+<div className='advert-video'>
 <div className='video-wrapper'>
 <video
 id={`video-${relatedPost.fields.slug}`}
