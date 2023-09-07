@@ -38,7 +38,7 @@ const Shop = ({ shopEntries }) => {
       </Head>
 
       <div className='site-description'>
-        <p>Marketplace of high quality curated Framer templates and components</p>
+        <p>Curated marketplace of high quality Framer and Webflow templates and components</p>
       </div>
 
       {/* Add category filtering buttons similar to the "Posts" page */}
