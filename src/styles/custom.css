@@ -904,7 +904,6 @@ display:none !important;
 }
 
 
-
 /*************************************************************************
 Categories page 
 *************************************************************************/
@@ -912,6 +911,66 @@ Categories page
 position: relative;
 padding-left: 10px;  
 }
+
+
+
+
+
+
+
+
+/***********************************************************************
+Shop
+***********************************************************************/
+
+.shop-container{
+  display: grid;
+  grid-template-columns:repeat(2, 1fr);
+  grid-column-gap:10px;
+  width:95%; 
+  margin: 0 auto;
+  }
+
+/*Post header */
+.shop-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom:5px;
+  }
+
+
+/***********************************************************************
+Product
+***********************************************************************/
+.product-container{
+width:100%;  
+margin:0 auto;
+}
+
+
+
+.product-content{
+width:80%;  
+margin:0 auto;
+}
+
+
+
+.related-products-title{
+display:none;  
+}
+
+.related-products-content{
+  display: grid;
+  grid-template-columns:repeat(3, 1fr);
+  grid-column-gap:10px;
+  width:95%; 
+  margin-top:150px;
+  margin-left:auto;
+  margin-right:auto;
+  }
+
 
 /***********************************************************************
 Footer

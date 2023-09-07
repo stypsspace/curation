@@ -50,12 +50,13 @@ const Home = ({ combinedEntries }) => {
  // ... Define other functions as needed (e.g., toggleFilterContainer)
 
 
- const filteredEntries = combinedEntries.filter(
-  (entry) =>
-    !selectedCategory ||
-    entry.fields.category === selectedCategory ||
-    (entry.sys.contentType.sys.id === 'advert' && entry.fields.category === selectedCategory)
-);
+ const filteredEntries = combinedEntries.filter((entry) => {
+  if (!selectedCategory) {
+    return true; // No category selected, show all entries
+  }
+  const entryCategory = entry.fields.category;
+  return entryCategory === selectedCategory;
+});
 
   return (
     <div>
@@ -89,7 +90,7 @@ const Home = ({ combinedEntries }) => {
           })
           
           .map((entry) => {
-            const { title, slug, coverImage, video, date, author, externalUrl } = entry.fields;
+            const { title, slug, coverImage, video, date, author, externalUrl, category } = entry.fields;
 
     // Inside your Home component
     console.log('filteredEntries:', filteredEntries);
@@ -245,15 +246,13 @@ export async function getStaticProps() {
     });
 
     const advertResponse = await getAdvertEntries();
-    console.log('Advert Response:', advertResponse);
 
     const posts = postResponse.items.map((post) => ({
       sys: post.sys,
       fields: post.fields,
     }));
 
-    const advertItems = Array.isArray(advertResponse?.items) ? advertResponse.items : [];
-    console.log('Advert Items:', advertItems);
+    const advertItems = Array.isArray(advertResponse) ? advertResponse : [];
 
     const combinedEntries = [...posts, ...advertItems];
 
