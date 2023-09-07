@@ -519,6 +519,13 @@ display:none;
 padding-top:44px; 
 }
 
+
+.advert-video{
+  position: relative; 
+  padding-bottom:4px;
+  /*padding-top:44px; */
+  }
+
 .advert-title{
  display:none; 
 }

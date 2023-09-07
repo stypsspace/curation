@@ -120,7 +120,7 @@ const Home = ({ combinedEntries }) => {
 
                     {/* Add video rendering for "Advert" entries here */}
                     {video && (
-                      <div className='post-video'>
+                      <div className='advert-video'>
                         <div className='video-wrapper'>
                           <video
                             id={`video-${slug}`}
