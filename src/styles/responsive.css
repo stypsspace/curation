@@ -25,6 +25,8 @@ ul.category-container{
 display: grid;
 grid-template-columns:repeat(2, 1fr);
 grid-column-gap:7px;
+padding-left: 15px;
+padding-right: 15px;
 width:100%;  
 }
 
@@ -35,8 +37,8 @@ display: grid;
 grid-template-columns:repeat(2, 1fr);
 grid-column-gap:20px;
 width:100%;  
-padding-left:55px;
-padding-right:55px;
+padding-left: 15px;
+padding-right: 15px;
 margin: 0 auto;
 }
 
@@ -49,6 +51,20 @@ grid-template-columns:repeat(2, 1fr);
 grid-column-gap:7px;
 width:100%;  
 padding-top:50px;
+padding-left: 15px;
+padding-right: 15px;
+}
+
+
+ul.related-products-content {
+position: relative;
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+grid-column-gap: 20px;
+width: 100%;
+padding-left: 15px;
+padding-right: 15px;
+margin-top: 180px;
 }
 
 }
@@ -73,6 +89,8 @@ ul.category-container{
 display: grid;
 grid-template-columns:repeat(1, 1fr);
 grid-column-gap:7px;
+padding-left: 15px;
+padding-right: 15px;
 width:100%;  
 }
 
@@ -83,8 +101,8 @@ display: grid;
 grid-template-columns:repeat(1, 1fr);
 grid-column-gap:20px;
 width:100%;  
-padding-left:55px;
-padding-right:55px;
+padding-left: 15px;
+padding-right: 15px;
 margin: 0 auto;
 }
 
@@ -97,6 +115,20 @@ grid-template-columns:repeat(1, 1fr);
 grid-column-gap:7px;
 width:100%;  
 padding-top:50px;
+padding-left: 15px;
+padding-right: 15px;
+}
+
+
+ul.related-products-content {
+position: relative;
+display: grid;
+grid-template-columns: repeat(1, 1fr);
+grid-column-gap: 20px;
+width: 100%;
+padding-left: 15px;
+padding-right: 15px;
+margin-top: 180px;
 }
 
 }
