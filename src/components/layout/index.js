@@ -36,8 +36,8 @@ return (
 <div className='site-footer-content'>
 
 <div className='subscribe-box'>
-<p className='subscribe-top'>Best websites in your inbox</p>
-<p className='subscribe-bottom'>No spam</p>
+<p className='subscribe-top'>Best websites and templates</p>
+<p className='subscribe-bottom'>in your inbox, no spam</p>
 <div className='subscribe-form'>
 {klaviyoFormLoaded && (
 <div className="klaviyo-form-UeNcKv"></div>

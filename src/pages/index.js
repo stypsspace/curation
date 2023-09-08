@@ -232,6 +232,7 @@ const Home = ({ combinedEntries }) => {
             }
           })}
       </ul>
+      <span className='open-filter'></span>
     </div>
   );
 };
