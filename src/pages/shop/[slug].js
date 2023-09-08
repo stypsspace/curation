@@ -74,7 +74,7 @@ const ProductPage = ({ product, relatedProducts }) => {
         <span className='product-single-externalurl'>
             {externalUrl && (
               <a href={externalUrl} target='_blank' rel='noopener noreferrer' className='mt-4 text-blue-500 underline'>
-                Preview
+                Buy
               </a>
             )}
           </span>
