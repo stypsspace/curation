@@ -21,7 +21,7 @@ Max-width:1024px and min-width:768px
 @media only screen and (max-width:1024px) and (min-width:768px){
 
 /* Categories grid */
-.category-container{
+ul.category-container{
 display: grid;
 grid-template-columns:repeat(2, 1fr);
 grid-column-gap:7px;
@@ -69,7 +69,7 @@ width:98.5%;
 
 
 /* Categories grid */
-.category-container{
+ul.category-container{
 display: grid;
 grid-template-columns:repeat(1, 1fr);
 grid-column-gap:7px;
