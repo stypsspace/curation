@@ -38,17 +38,20 @@ const Shop = ({ shopEntries }) => {
       </Head>
 
       <div className='site-description'>
-        <p>Curated marketplace of high quality Framer and Webflow templates and components</p>
+        <p>Curated marketplace of high quality Framer and Webflow templates</p>
       </div>
 
       {/* Add category filtering buttons similar to the "Posts" page */}
-      <div className='filter-container-wrap'>
-        <ul className='filter-container'>
+      <div className='shop-filter-container-wrap'>
+        <ul className='shop-filter-container'>
           <li>
             <button onClick={() => handleCategoryChange('')}>All</button>
           </li>
           <li>
-            <button onClick={() => handleCategoryChange('Category1')}>Category1</button>
+            <button onClick={() => handleCategoryChange('Framer')}>Framer</button>
+          </li>
+          <li>
+            <button onClick={() => handleCategoryChange('Webflow')}>Webflow</button>
           </li>
           {/* Add more category buttons as needed */}
         </ul>
@@ -92,7 +95,12 @@ const Shop = ({ shopEntries }) => {
               </div>
               <div className='shop-header'>
                 <h3>{title}</h3>
-                <div className='shop-price'>{price}</div>
+               
+                <span className='shop-view'>
+                <Link href={`/shop/${slug}`} aria-label={title}>
+                {price}
+                </Link>
+                </span>
               </div>
             </li>
           );

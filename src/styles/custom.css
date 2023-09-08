@@ -385,28 +385,48 @@ Index.js
 *******************************************************************/
 /* Categories grid */
 .category-container{
+position:relative;  
 display: grid;
 grid-template-columns:repeat(4, 1fr);
-grid-column-gap:10px;
-/*width:100%;*/  
-width:95%; 
+grid-column-gap:20px;
+width:100%;  
+padding-left:55px;
+padding-right:55px;
 margin: 0 auto;
-/*padding-left:10px;
-padding-right:10px;*/
 }
 
 
 
-.filter-wrap{
-position:relative;
-padding:20px;
+.home-filter-container-wrap{
+  position: relative; 
+  z-index: 2; 
+  }
+  
+  ul.home-filter-container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width:11.5%;
+  margin-left:55px;
+  /*margin-left: auto;
+  margin-right: auto;*/
+  margin-bottom:-60px;
+  }
+  
+ul.home-filter-container li{
+cursor: pointer; 
+background: #1f1f1f;
+border-radius: 5px;
+padding-top:5px;
+padding-left: 8px;
+padding-right: 8px;
+padding-bottom: 5px;
 }
 
-.filter-wrap select{
-color:#fff;
-cursor: pointer;
-}
 
+ul.home-filter-container li:active{
+background: #333;
+}
 
 /* Site description */
 .site-description{
@@ -441,14 +461,43 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 padding-bottom:5px;
+position: relative;
+top:5px;
+z-index: 1;
+
+
 }
 
 
 
 .post-header h3{
 position: relative; 
-top:1px;
+/*background: #333;*/
+border-radius: 5px;
+/*border: 1px solid #222;*/
+padding-top:5px;
+/*padding-left: 8px;*/
+padding-right: 8px;
+padding-bottom: 5px;
 }
+
+
+
+.post-header span{
+position: relative; 
+background: #1f1f1f;
+border-radius: 5px;
+padding-top:5px;
+padding-left: 8px;
+padding-right: 8px;
+padding-bottom: 5px;
+}
+
+
+
+
+
+
 
 .post-externalurl{
 position: relative; 
@@ -516,7 +565,8 @@ display:none;
 
 /* Advert */
 .advert-image{
-padding-top:44px; 
+padding-top:68px; 
+/*padding-top:44px; */
 }
 
 
@@ -532,17 +582,18 @@ padding-top:44px;
 
 .advert-button{
 position:relative;
-top:76px;
-left:3px;
+/*top:76px;
+left:3px;*/
 z-index:2;
 cursor: pointer; 
-background: #333;
+background: #191919;
 border-radius: 5px;
 padding-top:5px;
 padding-left: 8px;
 padding-right: 8px;
 padding-bottom: 5px;
 font-size:13px; 
+color:#444;
 }
 
 
@@ -552,6 +603,8 @@ font-size:13px;
   width:100%;
   height:auto;
   }
+
+
 
 /***************************************************************************
 Filter
@@ -679,7 +732,7 @@ Filter
 position: relative;
 padding-left: 10px;
 padding-right:10px;
-margin-top:80px;
+margin-top:150px;
 width:100%;
 clear:both;
 }
@@ -690,8 +743,7 @@ clear:both;
 position:relative; 
 text-align: center;
 font-size:28px;
-margin-top: 120px;
-margin-bottom:150px;
+margin-bottom:20px;
 }
 
 
@@ -718,7 +770,7 @@ padding-top:5px;
 padding-left: 8px;
 padding-right: 8px;
 padding-bottom: 5px;
-font-size:13px; 
+font-size:12px; 
 }
 
 /* Header */
@@ -739,7 +791,7 @@ position: relative;
 
 .post-single-externalurl{
 position: relative;
-font-size:13px;   
+font-size:12px;   
 }
 
 .post-single-externalurl{
@@ -751,7 +803,7 @@ padding-top:5px;
 padding-left: 8px;
 padding-right: 8px;
 padding-bottom: 5px;
-font-size:13px;
+font-size:12px;
 }
 
 .post-single-image{
@@ -765,6 +817,46 @@ width:100%;
 height:auto;  
 }
 
+
+  /* Video */
+.post-single-video{
+  position: relative;
+  width:85%;
+  margin:0 auto;
+  }
+  
+  
+  
+  /* styles.css or your preferred CSS file */
+  .video-player {
+  cursor: pointer;
+  position: relative;
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+  }
+  
+  .video-player video {
+  width: 100%;
+  height: auto;
+  outline: none; /* Remove the focus outline when clicked */
+  }
+  
+  .video-player video::-webkit-media-controls-start-playback-button {
+  display: none; /* Hide the play button in Safari */
+  }
+  
+  /* Hide default controls */
+  .video-player video::-webkit-media-controls {
+  display: none;
+  }
+  
+  
+  
+  .button-container,
+  .custom-button{
+  display:none !important;  
+  }
 
 /* Content */
 .post-single-content{
@@ -782,7 +874,7 @@ font-size:28px;
 .post-single-content p{
 padding-top:50px;
 position: relative;
-font-size: 12px;
+font-size: 16px;
 }
 
 .post-single-paragraph ul{
@@ -795,15 +887,25 @@ padding:0;
 
 .post-single-paragraph ul li{
 position: relative;
-margin-top:-48px;
+margin-top:-46px;
 }
 
 .post-single-paragraph-pageviews{
 position: relative;
-margin-bottom:20px; 
 }
 
 
+.back-home{
+  margin-top:40px;   
+  position: relative; 
+  background: #151515;
+  border-radius: 5px;
+  padding-top:5px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 5px;
+  display:inline-block;
+  }
 
 /* Related posts wrap */
 .related-posts-wrap{
@@ -830,7 +932,7 @@ padding-bottom:3px;
 .related-posts-header a{
 position:relative;
 top:1px;
-font-size: 13px;
+font-size: 12px;
 }
 
 .related-posts-externalurl button{
@@ -842,7 +944,7 @@ padding-top:5px;
 padding-left: 8px;
 padding-right: 8px;
 padding-bottom: 5px;
-font-size:13px;
+font-size:12px;
 display: block;
 }
 
@@ -852,9 +954,11 @@ ul.related-posts-content{
 position:relative;  
 display: grid;
 grid-template-columns:repeat(3, 1fr);
-grid-column-gap:7px;
+grid-column-gap:20px;
 width:100%;  
-padding-top:50px;
+padding-left:55px;
+padding-right:55px;
+margin-top:180px;
 }
 
 
@@ -869,46 +973,7 @@ padding-bottom:20px;
 Video. 
 *************************************************************************/
 
-/* Wrap */
-.post-single-video{
-position: relative;
-/*width:80%;*/
-width:100%;
-margin:0 auto;
-}
 
-
-
-/* styles.css or your preferred CSS file */
-.video-player {
-cursor: pointer;
-position: relative;
-width: 100% !important;
-height: auto !important;
-display: block;
-}
-
-.video-player video {
-width: 100%;
-height: auto;
-outline: none; /* Remove the focus outline when clicked */
-}
-
-.video-player video::-webkit-media-controls-start-playback-button {
-display: none; /* Hide the play button in Safari */
-}
-
-/* Hide default controls */
-.video-player video::-webkit-media-controls {
-display: none;
-}
-
-
-
-.button-container,
-.custom-button{
-display:none !important;  
-}
 
 
 /*************************************************************************
@@ -931,18 +996,44 @@ Shop
 ***********************************************************************/
 
 ul.shop-container{
-  display: grid;
-  grid-template-columns:repeat(2, 1fr);
-  grid-column-gap:10px;
-  width:95%; 
-  margin-left: auto;
-  margin-right: auto;
-  }
+position:relative;  
+display: grid;
+grid-template-columns:repeat(2, 1fr);
+grid-column-gap:20px;
+width:100%;  
+padding-left:55px;
+padding-right:55px;
+margin: 0 auto;
+}
 
 
-  ul.shop-container li{
-  margin-bottom: 50px;  
-  }
+ul.shop-container li{
+margin-bottom: 50px;  
+}
+
+
+.shop-filter-container-wrap{
+position: relative;  
+}
+
+.shop-filter-container{
+display: flex;
+justify-content: space-between;
+align-items: center;
+width:11.5%;
+margin-left:55px;
+margin-bottom:5px;
+}
+
+.shop-filter-container button{
+cursor: pointer; 
+background: #1f1f1f;
+border-radius: 5px;
+padding-top:5px;
+padding-left: 8px;
+padding-right: 8px;
+padding-bottom: 5px;
+}
 
 
 /*Post header */
@@ -951,7 +1042,38 @@ ul.shop-container{
   justify-content: space-between;
   align-items: center;
   padding-bottom:5px;
+  position:relative;
+  top:5px;
   }
+
+
+
+.shop-header h3{
+position: relative; 
+border-radius: 5px;
+padding-top:5px;
+padding-right: 8px;
+padding-bottom: 5px;
+}
+    
+    
+    
+.shop-header span{
+position: relative; 
+background: #1f1f1f;
+border-radius: 5px;
+padding-top:5px;
+padding-left: 8px;
+padding-right: 8px;
+padding-bottom: 5px;
+}
+
+
+
+.shop-price{
+display:none;  
+}
+
 
 
 /***********************************************************************
@@ -959,35 +1081,165 @@ Product
 ***********************************************************************/
 .product-container{
 width:100%;  
-margin:0 auto;
+margin-left: auto;
+margin-right: auto;
+margin-top:150px;
 }
 
+
+
+
+
+.product-content-title{
+font-size:25px;
+text-align: center;
+margin-bottom:20px;
+}
 
 
 .product-content{
-width:80%;  
+width:85%;  
 margin:0 auto;
 }
 
-.product-single-title{
-position:relative;
-margin-top: 50px;
-margin-bottom:50px;
+
+
+
+
+.product-single-header{
+  position:relative;
+  margin-top: 10px;
+  margin-bottom:50px;
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom:5px;
+  position:relative;
+  top:5px;
+  }
+  
+  
+  .product-single-header h3{
+  position: relative; 
+  border-radius: 5px;
+  padding-top:5px;
+  padding-right: 8px;
+  padding-bottom: 5px;
+  }
+  
+  
+  .product-single-header span{
+  position: relative; 
+  background: #1f1f1f;
+  border-radius: 5px;
+  padding-top:5px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 5px;
+  }
+
+.product-inner-content{
+width:70%;  
+margin:0 auto; 
 }
 
 
+.product-single-paragraph{
+position: relative;
+}
+
+
+.product-single-paragraph p{
+width:65%;
+font-size: 16px;
+line-height: 19px;
+}
+
+
+
+
+
+.product-single-buyurl{
+  position: relative; 
+  background: #1f1f1f;
+  border-radius: 5px;
+  padding-top:5px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 5px;  
+  top:50px;
+}
+
+.back-to-shop{
+margin-top:40px;   
+position: relative; 
+background: #151515;
+border-radius: 5px;
+padding-top:5px;
+padding-left: 8px;
+padding-right: 8px;
+padding-bottom: 5px;
+/*display:inline-block;*/
+display:none;
+}
+
+
+
+
+
+
+/* Related products */
 .related-products-title{
-display:none;  
-}
+  display:none;  
+  }
+  
 
 .related-products-content{
-  display: grid;
-  grid-template-columns:repeat(3, 1fr);
-  grid-column-gap:10px;
-  width:95%; 
-  margin-top:150px;
-  margin-left:auto;
-  margin-right:auto;
+position:relative;  
+display: grid;
+grid-template-columns:repeat(3, 1fr);
+grid-column-gap:20px;
+width:100%;  
+padding-left:55px;
+padding-right:55px;
+margin-top:180px;
+}
+
+
+
+.related-product-header{
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding-bottom:5px;
+position:relative;
+top:5px;
+}
+
+
+
+.related-product-header h3{
+  position: relative; 
+  /*background: #333;*/
+  border-radius: 5px;
+  /*border: 1px solid #222;*/
+  padding-top:5px;
+  /*padding-left: 8px;*/
+  padding-right: 8px;
+  padding-bottom: 5px;
+  }
+  
+  
+  
+  .related-product-header span{
+  position: relative; 
+  background: #1f1f1f;
+  border-radius: 5px;
+  padding-top:5px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 5px;
   }
 
 

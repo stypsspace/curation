@@ -130,7 +130,7 @@ alt={post.fields.author.fields.name}
 
 <div className='post-single-content'>
 <div className='post-single-header'>
-<h3 className='post-single-content-title'>{post.fields.title}</h3>
+<div className="post-single-paragraph-pageviews">{pageViews}  views </div>
 <span className='post-single-externalurl'>
 {post.fields.externalUrl && (
 <a href={post.fields.externalUrl} target='_blank' rel='noopener noreferrer' className='mt-4 text-blue-500 underline'>
@@ -141,9 +141,12 @@ View
 </div>
 
 <div className='post-single-paragraph'>
-<div className="post-single-paragraph-pageviews">{pageViews}  views </div>
 <RichText content={content} />
 </div>
+<div className="back-home">
+<Link   href="/">Back</Link>
+</div>
+
 </div>
 </div>
 </div>
@@ -199,6 +202,8 @@ playsInline
 </div>
 )}
 
+
+
 <div className='post-date'>
 {relatedPost.fields.date && (
 <time dateTime={new Date(relatedPost.fields.date).toISOString().slice(0, 10)}>
@@ -210,17 +215,22 @@ year: 'numeric',
 </time>
 )}
 </div>
-<div className='post-title'>
+
+
+<div className='post-header'>
 <h3>{relatedPost.fields.title}</h3>
+<span>View</span>
 </div>
 </Link>
+
+
 )}
 
 
 {/* Add rendering for "Post" entries here */}
 {relatedPost.type === 'Advert' && (
 <a href={relatedPost.fields.externalUrl} target='_blank' rel='noopener noreferrer'>
-<button className='advert-button'>Ad</button>
+
 <div className='advert-image'>
 {relatedPost.fields.coverImage?.fields?.file && (
 <ContentfulImage
@@ -266,6 +276,7 @@ year: 'numeric',
 <div className='advert-title'>
 <h3>{relatedPost.fields.title}</h3>
 </div>
+<button className='advert-button'>Sponsor</button>
 </a>
 )}
 

@@ -68,19 +68,20 @@ const Home = ({ combinedEntries }) => {
         <p>Curated websites for inspiration and promotion of good design</p>
       </div>
 
-      {/* Category Selection Dropdown */}
-      <div className='filter-wrap'>
-      <select onChange={(e) => handleCategoryChange(e.target.value)} value={selectedCategory}>
-        <option value=''>All</option>
-        {/* Add options for each category you have */}
-        <option value='Portfolio'>Portfolio</option>
-        <option value='Personal'>Personal</option>
-        {/* Add more category options as needed */}
-      </select>
-      </div>
+    {/* Category Selection Dropdown */}
+  <div className='home-filter-container-wrap'>
+  <ul className='home-filter-container'>
+  <li onClick={() => handleCategoryChange('')} className={selectedCategory === '' ? 'active' : ''}>All</li>
+  {/* Add options for each category you have */}
+  <li onClick={() => handleCategoryChange('Portfolio')} className={selectedCategory === 'Portfolio' ? 'active' : ''}>Portfolio</li>
+  <li onClick={() => handleCategoryChange('Personal')} className={selectedCategory === 'Personal' ? 'active' : ''}>Personal</li>
+  {/* Add more category options as needed */}
+  </ul>
+  </div>
 
       {/* Display "Post" and "Advert" entries */}
       <ul className='category-container'>
+        
         {filteredEntries
           .sort((entry1, entry2) => {
             const creationTime1 = new Date(entry1.sys.createdAt).getTime();
@@ -92,12 +93,7 @@ const Home = ({ combinedEntries }) => {
           .map((entry) => {
             const { title, slug, coverImage, video, date, author, externalUrl, category } = entry.fields;
 
-    // Inside your Home component
-    console.log('filteredEntries:', filteredEntries);
-
-
-
-
+  
 
             // Check if it's an "Advert" entry
             if (entry.sys.contentType.sys.id === 'advert') {
@@ -105,7 +101,7 @@ const Home = ({ combinedEntries }) => {
                 <li className='' key={slug}>
                   {/* Rendering for "Advert" entries */}
                   <a href={externalUrl} target="_blank" rel="noopener noreferrer">
-                    <button className='advert-button'>Ad</button>
+                    
                     <div className='advert-image'>
                       {coverImage && coverImage.fields && coverImage.fields.file && (
                         <ContentfulImage
@@ -152,6 +148,7 @@ const Home = ({ combinedEntries }) => {
                     <div className='advert-title'>
                       <h3>{title}</h3>
                     </div>
+                    <button className='advert-button'>Sponsor</button>
                   </a>
                 </li>
               );
@@ -226,6 +223,9 @@ const Home = ({ combinedEntries }) => {
                   </div>
                   <div className='post-header'>
                     <h3>{title}</h3>
+                    <span>
+                    <Link href={`/posts/${slug}`} aria-label={title}>View</Link>
+                    </span>
                   </div>
                 </li>
               );

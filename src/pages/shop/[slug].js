@@ -14,7 +14,7 @@ const ContentfulImage = (props) => {
 };
 
 const ProductPage = ({ product, relatedProducts }) => {
-  const { title, image, video, slug, description, price, content, externalUrl } = product.fields;
+  const { title, image, video, slug, description, price, content, externalUrl, buyUrl } = product.fields;
 
   // Sort the related products array by createdAt date in descending order
   const sortedRelatedProducts = relatedProducts.sort((product1, product2) => {
@@ -28,7 +28,10 @@ const ProductPage = ({ product, relatedProducts }) => {
       <Head>
         <title>{title} - Your Product Name</title>
       </Head>
-      <Link href="/shop">Back to Shop</Link>
+     
+
+
+             <div className="product-content-title">{title}</div>
 
       <div className="product-content">
        
@@ -63,14 +66,15 @@ const ProductPage = ({ product, relatedProducts }) => {
           </Link>
         </div>
 
-       <div className='product-single-title'>
-        <h1>{title}</h1>
-        <p>{description}</p>
-        <p>Price: {price}</p>
+
+
+        <div className='product-inner-content'>
+       <div className='product-single-header'>
+       <h3>{price}</h3>
         <span className='product-single-externalurl'>
             {externalUrl && (
               <a href={externalUrl} target='_blank' rel='noopener noreferrer' className='mt-4 text-blue-500 underline'>
-                Buy
+                Preview
               </a>
             )}
           </span>
@@ -79,7 +83,27 @@ const ProductPage = ({ product, relatedProducts }) => {
         <div className='product-single-paragraph'>
           <RichText content={content} />
         </div>
+
+        <span className='product-single-buyurl'>
+        {buyUrl && (
+              <a href={buyUrl} target='_blank' rel='noopener noreferrer' className='mt-4 text-blue-500 underline'>
+                Buy
+              </a>
+            )}
+          </span>
+
+        <div className="back-to-shop">
+        <Link   href="/shop">Back</Link>
+        </div>
+        
+
+</div>
+
+
       </div>
+
+
+
 
       {/* Display related products */}
       <div className="related-products-wrap">
@@ -100,14 +124,7 @@ const ProductPage = ({ product, relatedProducts }) => {
                   </Link>
                 )}
               </div>
-              <div className="related-product-header">
-                <h3>
-                  <Link href={`/shop/${relatedProduct.fields.slug}`} aria-label={relatedProduct.fields.title}>
-                    {relatedProduct.fields.title}
-                  </Link>
-                </h3>
-                <p>{relatedProduct.fields.price}</p>
-              </div>
+              
               {relatedProduct.fields.video && (
                 <div className="related-product-video">
                   <Link href={`/shop/${relatedProduct.fields.slug}`} aria-label={relatedProduct.fields.title}>
@@ -125,6 +142,16 @@ const ProductPage = ({ product, relatedProducts }) => {
                   </Link>
                 </div>
               )}
+
+           <div className="related-product-header">
+                <h3>
+                  <Link href={`/shop/${relatedProduct.fields.slug}`} aria-label={relatedProduct.fields.title}>
+                    {relatedProduct.fields.title}
+                  </Link>
+                </h3>
+                <span>{price}</span>
+              </div>
+
             </li>
           ))}
         </ul>
